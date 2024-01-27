@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. FFmpeg 相关概念1.1 FFmpeg 软件内容编译好的 FFmpeg 软件通常包含以下文件夹：bin ：包括 ffmpeg.exe（音视频转码、转换器），ffplay.exe（音视频播放器），ffprobe.exe（流媒体服务器）三个程序本体；doc ：可以理解为 FFmpeg 的说明书；licences ：所有 FFmpeg 用到的函数库的使用协议；presets ：FFmpeg 中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. FFmpeg 相关概念1.1 FFmpeg 软件内容编译好的 FFmpeg 软件通常包含以下文件夹：bin ：包括 ffmpeg.exe（音视频转码、转换器），ffplay.exe（音视频播放器），ffprobe.exe（流媒体服务器）三个程序本体；doc ：可以理解为 FFmpeg 的说明书；licences ：所有 FFmpeg 用到的函数库的使用协议；presets ：FFmpeg 中">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-27T12:23:09.723Z">
+<meta property="article:modified_time" content="2023-11-05T09:35:06.550Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-FFmpeg媒体处理基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2024-01-27T12:23:09.723Z" itemprop="datePublished">2024-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-FFmpeg-相关概念"><a href="#1-FFmpeg-相关概念" class="headerlink" title="1. FFmpeg 相关概念"></a>1. FFmpeg 相关概念</h2><h3 id="1-1-FFmpeg-软件内容"><a href="#1-1-FFmpeg-软件内容" class="headerlink" title="1.1 FFmpeg 软件内容"></a>1.1 FFmpeg 软件内容</h3><p>编译好的 FFmpeg 软件通常包含以下文件夹：<br><code>bin</code> ：包括 <code>ffmpeg.exe</code>（音视频转码、转换器），<code>ffplay.exe</code>（音视频播放器），<code>ffprobe.exe</code>（流媒体服务器）三个程序本体；<br><code>doc</code> ：可以理解为 FFmpeg 的说明书；<br><code>licences</code> ：所有 FFmpeg 用到的函数库的使用协议；<br><code>presets</code> ：FFmpeg 中 LibVPX 库用到的一些预设；</p>
+<h3 id="1-2-FFmpeg-运行方式"><a href="#1-2-FFmpeg-运行方式" class="headerlink" title="1.2 FFmpeg 运行方式"></a>1.2 FFmpeg 运行方式</h3><p><strong>方法一：</strong></p>
+<ol>
+<li>在 bin 目录下，按下鼠标右键（或按住 Shift 键然后按下鼠标右键）；</li>
+<li>选择并点击右键菜单中 <code>在此处打开Powershell窗口</code> 或 <code>在终端中打开</code> 等类型选项，即可打开命令窗口；</li>
+</ol>
+<p><strong>方法二：</strong></p>
+<ol>
+<li>在 bin 目录下，在文件管理器地址栏中输入 <code>cmd</code> 并回车，即可打开命令窗口；</li>
+</ol>
+<h3 id="1-3-FFmpeg-使用格式"><a href="#1-3-FFmpeg-使用格式" class="headerlink" title="1.3 FFmpeg 使用格式"></a>1.3 FFmpeg 使用格式</h3><p>FFmpeg 命令的典型语法如下，大致可以分为五个部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg [全局参数] [输入文件参数] -i [输入文件] [输出文件参数] [输出文件]</span><br></pre></td></tr></table></figure>
+
+<p>参数太多的时候，为了便于查看，ffmpeg 命令可以写成多行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg \</span><br><span class="line">[全局参数] \</span><br><span class="line">[输入文件参数] \</span><br><span class="line">-i [输入文件] \</span><br><span class="line">[输出文件参数] \</span><br><span class="line">[输出文件]</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg \</span><br><span class="line">-y \ <span class="comment"># 全局参数</span></span><br><span class="line">-c:a libfdk_aac -c:v libx264 \ <span class="comment"># 输入文件参数</span></span><br><span class="line">-i input.mp4 \ <span class="comment"># 输入文件</span></span><br><span class="line">-c:v libvpx-vp9 -c:a libvorbis \ <span class="comment"># 输出文件参数</span></span><br><span class="line">output.webm <span class="comment"># 输出文件</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的命令将 mp4 文件转成 webm 文件，这两个都是容器格式。输入的 mp4 文件的音频编码格式是 aac，视频编码格式是 H.264；输出的 webm 文件的视频编码格式是 VP9，音频格式是 Vorbis。</p>
+<p>如果不指明编码格式，FFmpeg 会自己判断输入文件的编码。因此，上面的命令可以简单写成下面的样子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.avi output.mp4</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-媒体相关概念"><a href="#2-媒体相关概念" class="headerlink" title="2. 媒体相关概念"></a>2. 媒体相关概念</h2><h3 id="2-1-封装格式"><a href="#2-1-封装格式" class="headerlink" title="2.1 封装格式"></a>2.1 封装格式</h3><p>封装格式也叫容器格式，视频文件本身其实是一个容器（container），里面包括了视频和音频，也可能有字幕等其他内容。<br>常见的封装格式有以下几种，一般来说，视频文件的后缀名反映了它的容器格式：</p>
+<blockquote>
+<p>MP4、MKV、WebM、AVI</p>
+</blockquote>
+<p>可以用以下命令查看 FFmpeg 支持的容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -formats</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-编码格式"><a href="#2-2-编码格式" class="headerlink" title="2.2 编码格式"></a>2.2 编码格式</h3><p>视频和音频都需要经过编码，才能保存成文件。不同的编码格式（CODEC）有不同的压缩率，会导致文件大小和清晰度的差异。<br>常用的视频编码格式如下：</p>
+<blockquote>
+<p>H.262、H.264、H.265、MPEG4、VP8、VP9、AV1</p>
+</blockquote>
+<p>其中 H.262、H.264、H.265、mpeg4 都是有版权的，但是可以免费使用，其他则是无版权的视频编码格式。</p>
+<p>常用的音频编码格式如下：</p>
+<blockquote>
+<p>MP3、AAC、AC-3、FLAC、VORBIS、OPUS</p>
+</blockquote>
+<p>上面所有编码格式都是有损的，编码后会损失一些细节，以换取压缩后较小的文件体积。无损的编码格式压缩出来的文件体积较大。</p>
+<p>可以用以下命令查看 FFmpeg 支持的编码格式，视频编码和音频编码都在内：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -codecs</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-编码器"><a href="#2-3-编码器" class="headerlink" title="2.3 编码器"></a>2.3 编码器</h3><p>编码器（encoders）是实现某种编码格式的库文件，只有安装了某种格式的编码器，才能实现该格式视频&#x2F;音频的编码和解码。</p>
+<p>以下是一些 FFmpeg 内置的视频编码器：</p>
+<blockquote>
+<p>libx264：最流行的开源 H.264 编码器<br>NVENC：基于 NVIDIA GPU 的 H.264 编码器<br>libx265：开源的 HEVC 编码器<br>libvpx：谷歌的 VP8 和 VP9 编码器<br>libaom：AV1 编码器</p>
+</blockquote>
+<p>音频编码器如下：</p>
+<blockquote>
+<p>libfdk-aac、aac</p>
+</blockquote>
+<p>可以用以下命令查看 FFmpeg 已安装的编码器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -encoders</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-基本语法"><a href="#3-基本语法" class="headerlink" title="3. 基本语法"></a>3. 基本语法</h2><h3 id="3-1-基本参数"><a href="#3-1-基本参数" class="headerlink" title="3.1 基本参数"></a>3.1 基本参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-i 即 input，指定输入文件</span><br><span class="line">-i + 输入文件名称/输入文件地址，如：-i input.mp4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-f 即 format，设置输出文件格式</span><br><span class="line">-f + 文件格式，如：-f mp3</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-y 不经过确认，输出时直接覆盖同名文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-fs 设置输出文件的大小，超过指定大小时将结束转换</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-ss 设置输入文件开始转换的时间，单位是秒</span><br><span class="line">-ss + hh:mm:ss，如：-ss 00:05:20 或更精确的 -ss 00:05:20.66</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-to 设置输入文件转换结束的时间，单位是秒</span><br><span class="line">-to + hh:mm:ss，如：-to 00:05:20 或更精确的 -to 00:05:20.66</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-t 设置输入文件转换的时长，单位是秒</span><br><span class="line">-t + hh:mm:ss，如：-t 00:05:20 或更精确的 -t 00:05:20.66</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-title 设置标题</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-timestamp 设置时间戳</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-vsync 增减Frame使影音同步</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-c 指定输出文件的编码</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-metadata 更改输出文件的元数据</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-<span class="built_in">help</span> 查看帮助信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-音频参数"><a href="#3-2-音频参数" class="headerlink" title="3.2 音频参数"></a>3.2 音频参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-acodec 即 audio codec，设置音频编码器</span><br><span class="line">-acodec + copy/相应音频编码器，如 -acodec copy 或 -acodec libmp3lame</span><br><span class="line">不指定具体编码器时ffmpeg会根据后缀自动匹配编解码器，其中 copy 即保持原音频编码不变，libmp3lame 是 mp3 的编码器，表示用 mp3 编码器对音频进行编码，-acodec 也可以写作 -c:a</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-ac 即 audio channels，设置音频声道数</span><br><span class="line">-ac + 声道数，如：-ac 2</span><br><span class="line">1 为单声道，2 为双声道立体声，默认使用原音频声道数</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-ar 即 audio rate，设置音频采样率</span><br><span class="line">-ar + 音频采样率，如 -ar 44100</span><br><span class="line">不指定具体采样率时默认原音频采样率</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-ab 即 audio byte，设置音频比特率</span><br><span class="line">-ab + 音频比特率，如 -ab 320k</span><br><span class="line">不指定具体比特率时默认128k</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-an 即 audio none，禁用音频，实际上就是剔除音频</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-vol 即 volume，设置音频音量</span><br><span class="line">-vol + 音量数值，如：-vol 100</span><br><span class="line">默认音量是 100% ，数值是 256，数值在 256 之下是把音量调低</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-aframes 4 设置音频的帧数</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-aq 4 audio quality设置音频质量</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-af ‘volume=2’ （audio filter）设置音频过滤器，这里将声音的值设为原来的二倍</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-视频参数"><a href="#3-3-视频参数" class="headerlink" title="3.3 视频参数"></a>3.3 视频参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-vcodec 设置视频编码器</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-b 设置比特率</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r 设置帧率</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s 设置分辨率</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-aspect 设置宽高比</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-vf 设置视频过滤器</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-其他参数"><a href="#3-4-其他参数" class="headerlink" title="3.4 其他参数"></a>3.4 其他参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-threads 设置使用的线程数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-map 设置输入文件中的流</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-FFmpeg-处理实例"><a href="#4-FFmpeg-处理实例" class="headerlink" title="4. FFmpeg 处理实例"></a>4. FFmpeg 处理实例</h2><p>视频格式转换</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.flv -vcodec copy -acodec copy output.mp4</span><br><span class="line">或直接</span><br><span class="line">ffmpeg -i input.flv output.mp4</span><br><span class="line">批量处理</span><br><span class="line"><span class="keyword">for</span> %i <span class="keyword">in</span> (*.flv) <span class="keyword">do</span> ffmpeg -i <span class="string">&quot;%i&quot;</span> -c copy <span class="string">&quot;%~ni.mp4&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 音频切割</span></span><br><span class="line">ffmpeg -i input.mp3 -ss 00:00:00.00 -to 00:05:20.00 -acodec copy output.mp3</span><br></pre></td></tr></table></figure>
+
+<p>音频合并</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i <span class="string">&quot;concat: 123.mp3|234.mp3&quot;</span> -acodec copy output.mp3</span><br></pre></td></tr></table></figure>
+
+<p>音频淡出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp3 -filter_complex afade=t=out:st=250:d=5 output.mp3</span><br></pre></td></tr></table></figure>
+
+<p>从视频中提取音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -f mp3 -vn output.mp3</span><br></pre></td></tr></table></figure>
+
+<p>合并视频和音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -i input.mp3 -vcodec copy -acodec copy output.mp4</span><br></pre></td></tr></table></figure>
+
+<p>删除视频中音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c:v copy -an output.mp4</span><br></pre></td></tr></table></figure>
+
+<p>替换原视频中音频</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -i input.mp3 -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 output.mp4</span><br></pre></td></tr></table></figure>
+
+<p>烧录字幕文件为视频硬字幕</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入视频格式可以根据实际需要进行更改</span></span><br><span class="line"><span class="comment"># 烧录所有类型字幕，字幕格式可以根据需要修改</span></span><br><span class="line">ffmpeg -i input.mp4 -vf <span class="string">&quot;subtitles=input.srt:force_style=&#x27;FontName=Microsoft Yahei,Fontsize=27,PrimaryColour=&amp;H0000FFFF&#x27;&quot;</span> output.mp4</span><br><span class="line"><span class="comment"># 烧录ass字幕</span></span><br><span class="line">ffmpeg -i input.mp4 -vf ass=input.str output.mp4</span><br><span class="line"><span class="comment"># 如果要设定烧录字幕样式，其格式如下</span></span><br><span class="line">ffmpeg -i input.mp4 -vf <span class="string">&quot;subtitles=input.srt:force_style=&#x27;FontName=MicrosoftYahei,Fontsize=27,PrimaryColour=&amp;H00FFFFFF&#x27;&quot;</span> -c:a copy -preset fast -crf 22 output.mp4</span><br></pre></td></tr></table></figure>
+
+<p>字幕文件格式互转</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.srt output.ass</span><br></pre></td></tr></table></figure>
+
+<p>添加字幕文件到视频软字幕</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -i input.ass -c copy output.mkv</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5. 参考"></a>5. 参考</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/FFmpeg">FFmpeg - 维基百科</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leixiaohua1020/article/details/12751349">ffmpeg参数中文详细解释</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67878761">给新手的 20 多个 FFmpeg 命令示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://ruanyifeng.com/blog/2020/01/ffmpeg.html">FFmpeg 视频处理入门教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" data-id="clrw1mrro0001icga2ehx4eov" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/27/Windows%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/27/%E5%B8%B8%E8%A7%81%E5%BD%B1%E8%A7%86%E7%89%87%E6%BA%90%E6%A0%87%E7%AD%BE%E8%A7%A3%E9%87%8A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/Windows%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/Windows%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

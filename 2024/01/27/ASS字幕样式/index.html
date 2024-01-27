@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. ASS 概述ASS 全称 Advanced SubStation Alpha，是一种比 SSA 更为高级的字幕格式，实质是SSA v4.00+ 版本。它拥有比 SSA 更多的功能。 SSA 全称 Sub Station Alpha，是一种字幕格式，其本身是一个 Windows 平台下专用于创建和编辑 SSA 格式字幕的软件，该软件已经不再开发了，而它所创造的 SSA 格式却流行开来，并演化出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. ASS 概述ASS 全称 Advanced SubStation Alpha，是一种比 SSA 更为高级的字幕格式，实质是SSA v4.00+ 版本。它拥有比 SSA 更多的功能。 SSA 全称 Sub Station Alpha，是一种字幕格式，其本身是一个 Windows 平台下专用于创建和编辑 SSA 格式字幕的软件，该软件已经不再开发了，而它所创造的 SSA 格式却流行开来，并演化出">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-27T12:23:09.725Z">
+<meta property="article:modified_time" content="2023-07-01T13:34:53.730Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ASS字幕样式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2024-01-27T12:23:09.725Z" itemprop="datePublished">2024-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-ASS-概述"><a href="#1-ASS-概述" class="headerlink" title="1. ASS 概述"></a>1. ASS 概述</h2><p><strong>ASS 全称 Advanced SubStation Alpha</strong>，是一种比 SSA 更为高级的字幕格式，实质是SSA v4.00+ 版本。它拥有比 SSA 更多的功能。</p>
+<p><strong>SSA 全称 Sub Station Alpha</strong>，是一种字幕格式，其本身是一个 Windows 平台下专用于创建和编辑 SSA 格式字幕的软件，该软件已经不再开发了，而它所创造的 SSA 格式却流行开来，并演化出了更先进的 ASS 格式。SSA 或 ASS 格式能实现比传统字幕诸如 srt 等格式更为复杂的功能。</p>
+<p>目前 ASS 字幕制作人员所看到的效果绝大多数都是由 xy-VSFilter 和 libass 渲染的，于是这两个渲染器就成了 ASS 事实上的标准。</p>
+<p><strong>ASS 格式字幕具有以下特点：</strong></p>
+<ol>
+<li><p>SSA v4.00 与之前的 SSA 版本格式不同，<strong>v4 可以阅读和加载以前版本的格式</strong>，但之前版本不支持v4以上的编写格式。换句话说，SSA从v4版本开始可以阅读它认识的命令而忽略不认识的命令，从而<strong>可以向下兼容，也可以向上兼容</strong>。</p>
+</li>
+<li><p>**SSA 是简单的文本文件 (DOS)**，因此可用任何文本编辑器手动编辑，但在手动编辑时必须谨慎，因为 SSA 将假定脚本遵守本文中的规定，在解析时任何错误都可能导致不可预测的结果。</p>
+</li>
+<li><p>脚本格式中的某些改变是为了允许 SSA v4.00 及以上的所有版本可以识别所有现存的和将来的 SSA 脚本。例如，新的 <code>Format</code> 字段允许 SSA 只读取它所能识别的并忽略未来可能加入的新的信息。</p>
+</li>
+<li><p>文件编写时所划分的各部分，从形式上来说类似于 ini 文件，但它并非真正的ini文件，不能像用 ini 文件一样使用它。</p>
+</li>
+<li><p>SSA文件最多包含五部分：<code>Script Info</code>、<code>v4+ Styles</code>、<code>Events</code>、<code>Fonts</code>、<code>Graphics</code>，其中 <code>Script Info</code> 必须是整个文件的第一行。<strong>现在的SSA文件已经很少包含 <code>Fonts</code> 和 <code>Graphics</code> 这两个部分了</strong>，因为这些功能只被 Sub Station Alpha 这一个程序所支持，而其它的 Filter (Vobsub&#x2F;Vsfilter&#x2F;Avery Lee Subtitler filter) 都不支持。</p>
+</li>
+<li><p>SSA文件的各个部分中的绝大多数行以一个 <strong>行描述符(line descriptor)</strong> 加上冒号开头，以指明它包含了什么信息。</p>
+</li>
+<li><p>SSA文件中每行中的信息字段以逗号分隔，于是在 角色名称(Events) 和 样式名称 (v4+ Styles) 中使用逗号是非法的（SSA 会阻止你这么做），这也使得将 SSA 脚本作为一个 CSV 文件把块导入到表格变得简单，同时砍掉在其他字幕节目中要用到的列信息。</p>
+</li>
+<li><p>事件部分(Events) 各行排列不分先后，它们可以以完全相反的顺序排列，SSA 会将它们按正确的顺序播放。即，你不能假定脚本文件中的每条对话行是按时间顺序排列的。如果两条对话的开始时间相同，那么会根据在脚本中的排列顺序显示到屏幕上。</p>
+</li>
+<li><p>格式不正确的行会被忽略，SSA 会丢弃任何它不能识别的行，同时在解析完后给出警告指明被忽略的行数。</p>
+</li>
+<li><p>行不能被分割，脚本中每个条目在单行中包含了它的完整信息，不能被分成多行。</p>
+</li>
+<li><p>如果在脚本中使用了一个未知的样式，将会使用默认的 <code>*Default</code> 样式。例如，如果从另一个脚本复制了一些行而没有复制对应的样式信息，那么就会使用默认样式。</p>
+</li>
+<li><p>当一个风格中指定了系统没有安装的字体，会用 Arial 字体代替。</p>
+</li>
+</ol>
+<h2 id="2-Script-Info-部分"><a href="#2-Script-Info-部分" class="headerlink" title="2. [Script Info] 部分"></a>2. [Script Info] 部分</h2><p>Script Info 部分包含了文件内容的标题和总体信息，主要用于介绍文件本身和制作者。<code>[Script Info]</code> 必须是 v4 版本 SSA 的第一行。该部分主要内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;</span><br><span class="line">分号，后面可以跟任何内容，只在脚本中用作注释，加载脚本时不可见。分号必须是该行的第一个字符，旧版本中使用 !: 注释。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Title</span><br><span class="line">标题，对脚本的描述，通常为作品名称或字幕组名称。如果未指定，自动设置为 &lt;untitled&gt;。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Original Script</span><br><span class="line">最初创建脚本的作者，通常为作者名称或字幕组名称。如果未指定，自动设置为 &lt;unknown&gt;。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Original Translation</span><br><span class="line">（可选）最初翻译对话的人。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Original Editing</span><br><span class="line">（可选）最初脚本的编辑者，通常是对翻译润色和校对的人。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Original Timing</span><br><span class="line">（可选）最初的时间轴人员。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Synch Point</span><br><span class="line">（可选）指明脚本在视频的何处开始播放，通常使用 0。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Script Updated By</span><br><span class="line">（可选）对原脚本进行更新的其他字幕团体的人。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Update Details</span><br><span class="line">（可选）其他字幕团体对原脚本更新的细节。如果未指定，该项不显示。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ScriptType</span><br><span class="line">SSA 脚本格式的版本信息，例如 V4.00 ，ASS 版本为 V4.00+。如果当前使用的 SSA 程序版本旧于脚本的版本，将给出警告。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Collisions</span><br><span class="line">决定了在自动防止字幕碰撞/冲突重叠显示时，字幕是如何移动的，包含 Normal 和 Reverse 两种模式。</span><br><span class="line">设置为 Normal，将尝试使用「Margins」指定的位置来定位字幕。同时，字幕会垂直地移动来防止重叠。在 Normal 的防重叠模式下，新字幕会出现在已存在字幕的上方，但它会寻找最低的不产生重叠的位置，来填补其他字幕产生的空隙。</span><br><span class="line">设置为 Reverse，已存在的字幕会上移给新字幕腾出空间，这意味这字幕总是可以自上向下地阅读，但也意味着已存在的字幕可能会在新字幕出现之前出现在屏幕的中间，它会占用大量的屏幕区域。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PlayResY</span><br><span class="line">渲染字幕时的渲染范围的高度，建议与视频分辨率一致。如果使用 Directdraw 播放，SSA v4 会自动选择最接近的已启用的设置。</span><br><span class="line"></span><br><span class="line">PlayResX</span><br><span class="line">渲染字幕时的渲染范围的宽度，建议与视频分辨率一致。如果使用 Directdraw 播放，SSA v4 会自动选择最接近的已启用的设置。</span><br><span class="line"></span><br><span class="line">关于屏幕坐标，有如下注意事项：</span><br><span class="line">1. 屏幕的左上角坐标为(0,0),右下角坐标为(PlayResX数值,PlayResY数值)，所有给出的坐标(三个边距, \pos, \move, 矢量绘图等)都以此数值作为参照；</span><br><span class="line">2. 所有的文字字号均按照此分辨率等比例放大缩小；</span><br><span class="line">3. 这个分辨率不影响最终显示文字的宽高比, 但影响矢量绘画图形的宽高比。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PlayDepth</span><br><span class="line">渲染字幕时的颜色深度。如果使用 Directdraw 播放，SSA v4 会自动选择最接近的已启用的设置。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Timer</span><br><span class="line">脚本的计时器速度，也即播放速度，为百分数，默认为 100%。例如，100.0000 代表 100%，保留四位小数。</span><br><span class="line">计时器速度是应用于 SSA 时钟的时间乘数，以提供斜坡时间来扩展或压缩脚本的总时间。速度大于 100% 会减少脚本总时间，意味着字幕会逐步地越来越早地出现；速度小于 100% 会增加脚本总时间，意味着字幕会逐步地越来越晚地出现（就像一个正的斜坡时间）。</span><br><span class="line">扩展和压缩只发生在脚本播放时，这个值不会改变脚本事件部分的实际时间。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WrapStyle</span><br><span class="line">当一个Dialogue行中存在用空格分开的多句话时，此项定义了默认的换行方式。</span><br><span class="line">0：智能换行，分割比较均匀，上面的行较长。</span><br><span class="line">1：从行尾的词换行，只有 \N 能强制换行。</span><br><span class="line">2：不换行，\n 和 \N 强制换行。</span><br><span class="line">3：和 0 一样智能换行，下面的行较长。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ScaledBorderAndShadow</span><br><span class="line">指定边框宽度与阴影深度是否随着视频分辨率等比例缩放，有 NO 和 YSE 两种类型，默认为 No。</span><br><span class="line">值为 No，边框宽度与阴影深度完全按照指定的像素数显示；</span><br><span class="line">值为 Yes，边框宽度与阴影深度随着实际视频的分辨率同等比例缩放。</span><br></pre></td></tr></table></figure>
+
+<p>常见的 ASS 文件还可能在 [Script Info] 部分添加一个 YCbCr Matrix(色彩空间，即色域) 选项。</p>
+<h2 id="3-v4-Styles-部分"><a href="#3-v4-Styles-部分" class="headerlink" title="3. [v4 Styles] 部分"></a>3. [v4 Styles] 部分</h2><p>Styles 定义了字幕的外貌和定位，ASS 格式应当使用 <code>[v4+ Styles]</code> ，该部分分为 Format 和 Style 两个部分。</p>
+<h3 id="3-1-Format-定义行"><a href="#3-1-Format-定义行" class="headerlink" title="3.1 Format 定义行"></a>3.1 Format 定义行</h3><p>Format 行定义了 Style 行中每一个字段所代表的含义，<strong>Format 行必须出现在所有 Style 行之前</strong>，因为它决定了 SSA 如何来解析 Style 行，Format 行所列出的字段必须正确拼写。Format 行允许未来的脚本格式中添加新的字段，也允许旧版本的软件读出它所能识别的字段，即便字段的顺序发生了变化。一般情况下该字段属性需要写全，其字段名如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Format: Name,Fontname, Fontsize, PrimaryColour, SecondaryColour, TertiaryColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, AlphaLevel, Encoding</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Style-样式行"><a href="#3-2-Style-样式行" class="headerlink" title="3.2 Style 样式行"></a>3.2 Style 样式行</h3><p>Style 行定义了字幕显示的样式，用于格式化脚本显示的文本，<strong>每一个被脚本使用的样式都应该被定义为 Style 行</strong>。Style 行中的所有设定，除了阴影和边框的类型和深度，都可以被字幕文本中的控制代码所覆写。<strong>Style 行中的字段应与 Format 行中设定的字段一一对应</strong>，各字段内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Name</span><br><span class="line">样式的名称，用于 [Events]部分 引用，区分大小写，不能包含逗号。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fontname</span><br><span class="line">使用的字体名称，区分大小写。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fontsize</span><br><span class="line">字体的大小，即字号。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PrimaryColour</span><br><span class="line">文本主体颜色，设置字幕正常显示时的填充颜色。</span><br><span class="line"></span><br><span class="line">SecondaryColour</span><br><span class="line">文本次要颜色，在某条字幕为了防止重叠而自动移动时可能会使用该颜色而不是 PrimaryColour 以区分不同的字幕。主要是用在卡拉 OK 效果中由 SecondaryColour 变为 PrimaryColour。</span><br><span class="line"></span><br><span class="line">TertiaryColour OutlineColor</span><br><span class="line">文本边框颜色，ASS 中的名称为 OutlineColor。</span><br><span class="line"></span><br><span class="line">BackColour</span><br><span class="line">文本阴影颜色。</span><br><span class="line"></span><br><span class="line">以上四种字幕颜色设置均采用长整型 BGR（蓝绿红）值，还包含一个 alpha 通道信息。该值的十六进制字节顺序为 AABBGGRR，&amp;H是十六进制的标识符。例如，&amp;H00FF0000(蓝色)、&amp;H0000FF00(绿色)、&amp;H000000FF(红色)、&amp;H00FFFFFF(白色)。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Bold</span><br><span class="line">定义文本是否为粗体，-1 是粗体，0 不是。Bold 属性与斜体属性相互独立，即可以把文本同时设置为粗体和斜体。</span><br><span class="line"></span><br><span class="line">Italic</span><br><span class="line">定义文本是否为斜体，-1 是斜体，0 不是。Italic属性与粗体属性相互独立，即可以把文本同时设置为粗体和斜体。</span><br><span class="line"></span><br><span class="line">Underline</span><br><span class="line">定义文本是否有下划线，-1 是有，0 是没有。</span><br><span class="line"></span><br><span class="line">Strikeout</span><br><span class="line">定义文本是否有中划线（删除线），-1 是有，0 是没有。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ScaleX</span><br><span class="line">文本横向缩放，即修改字体的宽度，为百分数，100为正常宽度。</span><br><span class="line"></span><br><span class="line">ScaleY</span><br><span class="line">文本纵向缩放，即修改字体的高度，为百分数，100为正常高度。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Spacing</span><br><span class="line">字间距，单位为像素px，0为正常间距。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Angle</span><br><span class="line">旋转角度，绕 z 轴逆时针旋转，负数则是顺时针旋转，单位为度，可用小数，旋转所基于的原点由 Alignment 定义。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BorderStyle</span><br><span class="line">边框样式，1 为边框 + 阴影，3 为不透明纯色背景，当值为3时, 文字底面为纯色的背景, 纯色背景下方为阴影背景，可以被 \r 重置。</span><br><span class="line"></span><br><span class="line">Outline</span><br><span class="line">文字边框宽度，如果 BorderStyle 为 1，则该属性定义了文字边框的像素宽度，常见的值有 0、1、2、3、4。</span><br><span class="line"></span><br><span class="line">Shadow</span><br><span class="line">文字阴影深度，如果 BorderStyle 为 1，则该属性定义了文字阴影的像素深度，常见的值有 0、1、2、3、4，阴影深度向右下偏移。阴影总是基于边框使用，当边框宽度没有给定时 SSA 会强制把边框设置为 1px，事实上阴影和边框可以独立使用，互不影响。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Alignment</span><br><span class="line">对齐方式，该属性定义了文本在屏幕上的位置，采用九宫格位置，从左上到右下其值依次为5、6、7、9、10、11、1、2、3。在 ASS 中则是按数字键盘对应的位置，从左上到右下其值依次为7、8、9、4、5、6、1、2、3。</span><br><span class="line"></span><br><span class="line">MarginL</span><br><span class="line">左边距，单位为像素px，即到屏幕左边缘的距离。</span><br><span class="line"></span><br><span class="line">MarginR</span><br><span class="line">右边距，单位为像素px，即到屏幕右边缘的距离。</span><br><span class="line"></span><br><span class="line">MarginV</span><br><span class="line">垂直边距，单位为像素px，对于底部字幕，它是字幕和屏幕底部的距离，对于顶部字幕，它是字幕和屏幕顶部的距离，对于中部字幕，该值被忽略，字幕会垂直居中。</span><br><span class="line"></span><br><span class="line">三个屏幕边距MarginL、MarginR、MarginV定义了字幕可以出现的区域。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AlphaLevel</span><br><span class="line">定义文本透明度，SSA 尚未使用，ASS 中没有该字段。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Encoding </span><br><span class="line">定义字体的字符集或编码方式，在多语种的 Windows 安装中它可以获取多种语言中的字符，0 为 ANSI，1 为 默认，128 为 日文，134 为 简体中文，136 为 繁体中文，一般用默认 1 即可。当文件是 Unicode 编码时，该字段在解析对话时会起作用。</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Events-部分"><a href="#4-Events-部分" class="headerlink" title="4. [Events] 部分"></a>4. [Events] 部分</h2><p>Events 定义了字幕对白、时间轴信息、以及对白的显示方式，该部分分为 Format、Dialogue 等部分。</p>
+<h3 id="4-1-Format-定义行"><a href="#4-1-Format-定义行" class="headerlink" title="4.1 Format 定义行"></a>4.1 Format 定义行</h3><p>Format 决定了 SSA 如何来解析下面的事件行，<strong>Format 行必须出现在所有 Style 行之前</strong>，Format 行所列出的字段必须正确拼写。其字段名如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Format: Marked/Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-Dialogue-对话行"><a href="#4-2-Dialogue-对话行" class="headerlink" title="4.2 Dialogue 对话行"></a>4.2 Dialogue 对话行</h3><p>Dialogue 是一个对话事件，即显示一些文本，包含了字幕文本、时间轴信息以及字幕的显示方式，<strong>Dialogue 行中的字段应与 Format 行中设定的字段一一对应</strong>，各字段内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Marked</span><br><span class="line">在 SSA 文件中该字段为 Marked，值为 0 表示该行为未标识行，值为 1 表示该行为标识行。</span><br><span class="line"></span><br><span class="line">Layer</span><br><span class="line">在 SSA 文件中该字段为 Layer，定义字幕图层，可为任何整数，图层数值不同的字幕会在重叠检测中被忽略，即不会发生冲突，图层数值大的会直接覆盖在图层数值小的上面。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Start</span><br><span class="line">事件的开始时间，格式为 0:00:00:00（小时:分:秒:毫秒），即字幕显示在屏幕上时脚本播放经过的时间，注意小时只有一位。</span><br><span class="line"></span><br><span class="line">End</span><br><span class="line">事件的结束时间，格式为 0:00:00:00（小时:分:秒:毫秒），即字幕在屏幕上消失时脚本播放经过的时间，注意小时只有一位。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Style</span><br><span class="line">样式名，即在 [v4+ Styles] 中定义的样式名称，如果要使用的 Default 样式已存储在脚本中却被 SSA 忽略了，这时要使用它可以修改 [v4+ Styles] 中的样式名称，以便它出现在脚本的样式列表里。</span><br><span class="line">在 SSA 这个软件中，有一个自带的 *Default 样式，如果在 [v4+ Styles] 里没有找到对应的样式，那么就会使用自带的 *Default 样式。根据 SSA 软件本身的特性，如果设置为 Default（无星号），即便在 [v4+ Styles] 中定义了自己的 Default 样式，SSA 这个软件也会使用自带的 *Default 样式。但在实际的应用中，都是在 [v4+ Styles] 定义好 Default 样式，如果之后使用了未定义的样式名，那么就使用 Default 样式，如果 Default 样式也没有定义，那样才使用渲染器自带的样式。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Name</span><br><span class="line">角色名，说这条对白的角色名，只为了在编辑和设定时间轴时方便辨认，可为空值。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MarginL</span><br><span class="line">文本左边距覆写值，单位为像素px，共 4 位数字，0000 表示使用在 Style 行中定义的值。</span><br><span class="line"></span><br><span class="line">MarginR</span><br><span class="line">文本右边距覆写值，单位为像素px，共 4 位数字，0000 表示使用在 Style 行中定义的值。</span><br><span class="line"></span><br><span class="line">MarginV</span><br><span class="line">文本垂直边距覆写值，单位为像素px，共 4 位数字，0000 表示使用在 Style 行中定义的值。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Effect</span><br><span class="line">过渡效果。可以为空值，效果名称区分大小写，必须正确拼写，不加引号，该属性有以下三种属性值：</span><br><span class="line"></span><br><span class="line">Karaoke</span><br><span class="line">表示卡拉OK效果，依次高亮每个字。在ASS中该效果类型已经废弃不用。</span><br><span class="line"></span><br><span class="line">Scroll up;y1;y2;delay[;fadeawayheight]</span><br><span class="line">表示文本或图片会在屏幕上向上滚动，Scroll up 之后的参数字段用分号分隔。</span><br><span class="line">Scroll down;y1;y2;delay[;fadeawayheight]</span><br><span class="line">同上，为向下滚动。</span><br><span class="line">y1 和 y2 值定义了文本在屏幕上滚动的垂直范围。两值单位为像素px，不区分顺序，位置可以互换。如果两个值都是 0，文本会在整个屏幕高度向上滚动。</span><br><span class="line">delay 可取 1-100 的值，0 表示无延迟按原速度滚动，数字越大速度越小，当 delay 值大于 1 时，移动 1px 需要(1000/delay)秒。</span><br><span class="line">fadeawayheigh 值可选，为上下的淡入淡出范围，可以使文本滚动到其范围的边缘时呈现淡出效果。</span><br><span class="line"></span><br><span class="line">Banner;delay[;lefttoright;fadeawaywidth]</span><br><span class="line">表示所有文本或图片都忽略长度到一行里，从右向左滚动经过屏幕。</span><br><span class="line">delay 值同上。</span><br><span class="line">lefttoright 值可选，为 0 或 1。默认为 0，表示从右向左滚动，1则是从左向右移动。</span><br><span class="line">fadeawaywidth 值同上，为左右的淡入淡出范围。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Text</span><br><span class="line">字幕文本，是作为字幕实际出现在屏幕上的文本。任何第 9 个逗号之后的文本都被当作是字幕文本，所以可以包含逗号。文本中可以包含表示换行的 \n 代码，也可以包含在大括号 &#123;&#125; 之间出现的样式覆写控制代码。</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-Comment-注释行"><a href="#4-3-Comment-注释行" class="headerlink" title="4.3 Comment 注释行"></a>4.3 Comment 注释行</h3><p><strong>Comment 行是一个注释事件，起评论和说明的作用</strong>，可以与其它类型的事件行包含一样的信息，但不会被作为字幕加载到屏幕上。</p>
+<h3 id="4-4-Picture-图片行"><a href="#4-4-Picture-图片行" class="headerlink" title="4.4 Picture 图片行"></a>4.4 Picture 图片行</h3><p>**Picture 行是一个图片事件，支持的图片格式有 <code>.bmp</code>、<code>.jpg</code>、<code>.gif</code>、<code>.ico</code> 以及<code>.wmf</code>，但不支持<code>.png</code>**，与Dialogue行包含一样的控制信息，但要在 字段10 的位置指定显示的图片的完整路径与图片名称。</p>
+<p>写入 Picture 行后，之前的样式定义效果会有改变，其中 Effect（过渡效果）可以运用到图片事件上，MarginL（左边距）和 MarginV（垂直边距）被用来指定图片与左边缘与下边缘的像素距离，当 MarginL 为 0000 时，图片水平居中，当 MarginV 为 0000&#96;时，图片垂直居中。</p>
+<p>只有SSA软件能支持加载图片事件，Filter不支持加载 Picture 行。</p>
+<h3 id="4-5-Sound-音频行"><a href="#4-5-Sound-音频行" class="headerlink" title="4.5 Sound 音频行"></a>4.5 Sound 音频行</h3><p>**Sound 行是一个音频事件，支持的音频格式为 <code>.wav</code>**，与 Dialogue 行包含一样的控制信息，但要在 字段10 的位置指定加载的音频文件的完整路径与名称。</p>
+<p>写入 Sound 行后，之前的样式定义效果会有改变，其中Style（样式）与 MarginL（左边距）、MarginR（右边距）、MarginV（垂直边距）等值被忽略，End（结束时间值）也被忽略，该声音会播放到它结束，或者播放到新的声音行加入为止。</p>
+<p>只有SSA软件能支持加载图片事件，Filter不支持加载 Sound 行。</p>
+<h3 id="4-6-Movie-视频行"><a href="#4-6-Movie-视频行" class="headerlink" title="4.6 Movie 视频行"></a>4.6 Movie 视频行</h3><p>**Movie 行是一个视频事件，支持的音频格式为 <code>.avi</code>**，与 Dialogue 行包含一样的控制信息，但要在字段10的位置指定加载的视频文件的完整路径与名称。</p>
+<p>写入 Movie 行后，之前的样式定义效果会有改变，其中 Style（样式）和 Effect（过渡效果）会被忽略， End（结束时间值）指定了视频消失的时间，但如果 avi 文件仍然没有结束，则其声音会继续播放。MarginL（左边距）和 MarginV（垂直边距）可以指定影片左上角的位置（和 Picture 事件不同），MarginL 或 MarginV 为  0000 意味着影片水平居中或垂直居中。</p>
+<p>如果在 wav 声音播放的过程中任何 avi 影片开始播放，那么任何 avi 中的声音将听不见，同理，在 avi 影片播放的过程中 wav 声音开始播放，那么 wav 声音将听不见。当Movie与Sound行有时间重叠时，实际听到的声音以先开始的内容为准。</p>
+<p>只有SSA软件能支持加载图片事件，Filter不支持加载 Movie 行。</p>
+<h3 id="4-7-Command-命令行"><a href="#4-7-Command-命令行" class="headerlink" title="4.7 Command 命令行"></a>4.7 Command 命令行</h3><p><strong>Command 行是一个命令事件，意味着 SSA 可以以后台任务执行指定的程序</strong>，与 Dialogue 行包含一样的控制信息，但要在字段10的位置指定要执行的程序的完整路径和名称。</p>
+<p>写入 Command 行后，之前的样式定义效果会有改变，其中 MarginL（左边距）、MarginR（右边距）、MarginV（垂直边距）、Effect（过渡效果）、End（结束时间值）会被忽略，程序会运行到它结束为止，或者直到人为地关闭。</p>
+<p>有一些 SSA 软件内置的命令可以在脚本中出现，但实际完全用不到，比如 <code>SSA:Pause</code>、<code>SSA:Wait for trigger</code> 或同步锁相控制命令(Genlock Control Commands)。这些命令都以 <code>SSA:</code> 开头，其作用如下：</p>
+<p><code>SSA:Pause</code> 命令和在脚本播放时按 P 键有同样的功能。它作为第二同步点（Synch Point）在光盘换面后恢复播放字幕时很有用。<br><code>SSA:Wait for audio trigger</code> 命令和在脚本播放时按 P 键有同样的功能，但如果计算机的音频输入超过指定的 trigger 等级，暂停会被自动取消。它作为第二同步点（Synch Point）在光盘换面后恢复播放字幕时很有用。音频触发可以被按 P 键恢复播放来覆写，如果没有接收到足够大小的音频峰值，P 键也没有在 10 分钟内按下，音频触发会在 10 分钟后超时，然后播放无论如何都会恢复。</p>
+<p>只有SSA软件能支持加载图片事件，Filter不支持加载 Command 行。</p>
+<h3 id="4-8-样式覆写代码"><a href="#4-8-样式覆写代码" class="headerlink" title="4.8 样式覆写代码"></a>4.8 样式覆写代码</h3><p>样式覆写代码专用于 [Events] 部分的最后一个 <code>Text</code> 字段中，用来实现对文字和图片风格的重新定义。</p>
+<p><strong>样式覆写代码有如下规则：</strong></p>
+<ol>
+<li>除了 <code>\h</code>、<code>\n</code> 和 <code>\N</code>，所有覆写代码都写在大括号 <code>&#123; &#125;</code> 里；</li>
+<li>所有覆写代码都以反斜杠 <code>\</code> 开头；</li>
+<li>一个大括号 <code>&#123; &#125;</code> 内可以放多个覆写代码；</li>
+<li>所有覆写代码都作用于其后的所有文字，如果要让某个覆写代码只作用于选定的文字，要在选定文字的后面加一个「取消」用的覆写代码，来取消前面的覆写代码；</li>
+<li>某些覆写代码会自动作用于整行文本，目前只有 <code>Alignment</code> 代码，之后可能会加入更多，例如，阴影和边框深度的覆写；</li>
+<li><code>\pos</code> 和 <code>\move</code> 等也会作用于整行文本，下面的具体说明中会提到；</li>
+<li>在下面的写法中，<code>&lt;&gt;</code> 包围的内容表示该部分需要输入参数，<code>[]</code> 包围的内容表示可选项；</li>
+</ol>
+<p><strong>常见的样式覆写代码如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\n</span><br><span class="line">换行，回车。如果启用了智能换行，\n 会被忽略。示例：第一行\n第二行。</span><br><span class="line">\n 只在 WrapStyle: 2 或 \q2 时会换行，其他模式下都相当于一个空格。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\N</span><br><span class="line">换行，回车。当智能换行启用时用来代替 \n 实现换行。</span><br><span class="line">任何模式下都会强制换行，在 xy-VSFilter 下，\N 在过渡效果 Banner 中也会换行；在 libass 下，\N 在 Banner 中不换行，相当于空格。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\h</span><br><span class="line">强制空格。保证显示字幕时不会在它的这个空格上分行，即使 \h 左右两个词在同一行。</span><br><span class="line">原文档中没有该代码的描述，根据渲染器的实际效果，猜测其作用为将其左右两边的单词连到一起，让解析器将两边的单词看作一个单词，在普通的换行中不会在单词中间换行。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\b&lt;0或1&gt;</span><br><span class="line">文本粗体，\b1 把文本变为粗体，\b0 强制文本不是粗体。</span><br><span class="line">当参数大于 1，则会作为字体的重量值（400 = 普通，700 = 粗体，大多数字体的粗细可以量化 2 或 3 个等级）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\i&lt;0或1&gt;</span><br><span class="line">文本斜体，\i1 把文本变为斜体，\i0 强制文本不是斜体。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\u&lt;0或1&gt;</span><br><span class="line">文本下划线，\u1 给文本变加下划线，\u0 强制取消文本下划线。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\s&lt;0或1&gt;</span><br><span class="line">文本中划线，\s1 给文本变加中划线（删除线），\s0 强制取消文本中划线。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\bord&lt;宽度&gt;、\xbord&lt;宽度&gt;、\ybord&lt;宽度&gt;</span><br><span class="line">边框宽度，单位为像素px，可以是小数，有 x 或 y 时可以单独设置沿 X 轴或 Y 轴的边框宽度。示例：\bord1、\xbord2、\ybord3。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\shad&lt;深度&gt;、\xshad&lt;深度&gt;、\yshad&lt;深度&gt;</span><br><span class="line">阴影深度，单位为像素px，可以是小数，有 x 或 y 时可以单独设置沿 X 轴或 Y 轴的阴影深度。示例：\shad1、\xshad2、\yshad3。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\be&lt;强度&gt;</span><br><span class="line">边缘模糊，按一般模糊的倍数来模糊文字边缘。当强度过大时会导致文字消失。示例：\be1。</span><br><span class="line">这里的 &lt;强度&gt; 必须是整数，表示模糊效果叠加的次数。当文字有边框时，模糊的对象是边框；当文字没有边框时，模糊的对象是文字本身。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\blur&lt;强度&gt;</span><br><span class="line">高斯模糊，与 \be 相似，但它用的是更加高级的高斯模糊。示例：\blur2.33。</span><br><span class="line">这里的 &lt;强度&gt; 可以是小数。当文字有边框时，模糊的对象是边框；当文字没有边框时，模糊的对象是文字本身。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\fn&lt;字体名&gt;</span><br><span class="line">指定一个系统中已安装的字体，区分大小写。如果指定的字体没有安装，那么会使用 Arial 字体。示例：\fn微软雅黑。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\fs&lt;字体尺寸&gt;</span><br><span class="line">&lt;字体尺寸&gt; 是一个数字，指定了字体的点的尺寸。</span><br><span class="line">这里的字体尺寸并不是字号的大小，\fs20 并不是字体大小（font-size）为 20px，而是指其行高（line-height）为 20px，主要归咎于 VSFilter 使用的 Windows GDI 的字体接口。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\fs+&lt;数值&gt;、\fs-&lt;数值&gt;</span><br><span class="line">将当前文本的字体尺寸乘一定的倍数。例如，\fs+2 表示将当前文本的字体尺寸乘 1.2，\fs-3 表示将当前文本的字体尺寸乘 0.7。计算方式为(10 ± &lt;数值&gt;) * 当前字体尺寸，当计算的结果小于等于 0 时结果不生效，即依然为原来的字体尺寸。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\fscx&lt;百分数&gt;、\fscy&lt;百分数&gt;</span><br><span class="line">缩放文字大小，表示缩放到原来的百分比。\fscx&lt;百分数&gt; 为水平缩放，\fscy&lt;百分数&gt; 为垂直缩放。示例：\fscx233.33、\fscy50。</span><br><span class="line">可适用于矢量图形。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\fsp&lt;像素值&gt;</span><br><span class="line">字间距，默认为 0。写法举例：\fsp3。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\fr&lt;度数&gt;、\frx&lt;度数&gt;、\fry&lt;度数&gt;、\frz&lt;度数&gt;</span><br><span class="line">文本旋转度数，表示沿 X 或 Y 或 Z 轴旋转一定的度数，&lt;度数&gt;可以为负值, 可以大于360，\fr&lt;度数&gt; 默认表示沿 Z 轴旋转。示例：\fr30、\frx-30、\fry-233.33、\frz480。</span><br><span class="line">其旋转的原点由 \org 决定，如果没有指定 \org，那么按默认定位点（参见\pos的说明）来旋转。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\fax&lt;因数&gt;、\fay&lt;因数&gt;</span><br><span class="line">分别沿 X 轴和 Y 轴对文字行进行倾斜调整。 如 \fax-0.5 等同于斜体。一般情况下因数的绝对值不要超过 2。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\fe&lt;字符集&gt;</span><br><span class="line">文本字符集（字体编码）。通常 0 为英文，1 为系统默认，134 为简体中文，136 为繁体中文。</span><br><span class="line">当 ASS/SSA 文件本身的编码非 Unicode 编码时, 这个数值指定哪种字符集来显示字幕，当 ASS/SSA 文件为 Unicode 方式编码如 UTF-8 时，可以忽略该设置。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">\[&lt;颜色序号&gt;]c[&amp;][H]&lt;BBGGRR&gt;[&amp;]</span><br><span class="line">&lt;BBGGRR&gt; 是一个十六进制的 RGB 值，但颜色顺序相反，前导的 0 可以省略。</span><br><span class="line">&lt;颜色序号&gt; 可选值为 1、2、3 和 4，分别对应单独设置 PrimaryColour、SecondaryColour、OutlineColor 和 BackColour，&lt;颜色序号&gt; 未写时相当于设置 PrimaryColour。写法举例：\c&amp;HFF0000&amp;、\1c&amp;HFF&amp;、\2c&amp;HFF00&amp;、\3c&amp;HFFFFFF、\4cFFFFFF。</span><br><span class="line">其中的 &amp; 和 H 按规范应该是要有的，但是如果没有也能正常解析。</span><br><span class="line"></span><br><span class="line">\[&lt;颜色序号&gt;]c</span><br><span class="line">当 c 后面不跟其他字符时，会设置为当前使用的 Style 中定义的对应的值。</span><br><span class="line"></span><br><span class="line">\&lt;颜色序号&gt;a[&amp;][H]&lt;AA&gt;[&amp;]</span><br><span class="line">&lt;AA&gt; 是一个十六进制的透明度数值，00 为全见，FF 为全透明。</span><br><span class="line">&lt;颜色序号&gt; 含义同上，但这里不能省略。写法举例：\1a&amp;H80&amp;、\2a&amp;H80、\3a80、\4a&amp;H80&amp;。</span><br><span class="line">其中的 &amp; 和 H 按规范应该是要有的，但是如果没有也能正常解析。</span><br><span class="line"></span><br><span class="line">\alpha[&amp;][H]&lt;AA&gt;[&amp;]</span><br><span class="line">&lt;AA&gt; 是一个十六进制的透明度数值，00 为全见，FF 为全透明。它默认相当于 \1a&amp;H&lt;AA&gt;&amp;。写法举例：\alpha80。</span><br><span class="line">猜测是原文的笔误，实际效果为一次性设置 PrimaryColour、SecondaryColour、OutlineColor 和 BackColour。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\a&lt;位置&gt;</span><br><span class="line">&lt;位置&gt; 是一个数字，决定了字幕显示在屏幕上哪个位置。1、2、3 分别是底部的居左，居中、居右；5、6、7 分别是顶部的居左，居中、居右；9、10、11 分别是中部的居左，居中、居右。如果是 0 或者没有就设置为默认位置。如果出现了多个 \a 或 \an 则以第一个出现的为准。</span><br><span class="line"></span><br><span class="line">\an&lt;位置&gt;</span><br><span class="line">与小键盘布局相同。如果出现了多个 \a 或 \an 则以第一个出现的为准。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\k&lt;时长&gt;</span><br><span class="line">&lt;时长&gt; 是一个以百分之一秒为单位的时间，表示以卡拉 OK 效果高亮它所控制的那段文本的延时。</span><br><span class="line">控制范围为 \k&lt;时长&gt; 之后，下一个 \k&lt;时长&gt; 或结尾之前，例如，&#123;\k100&#125;这里受 \k100 控制&#123;\k200&#125;这里受 \k200 控制。</span><br><span class="line">高亮之前文字使用 SecondaryColour，高亮后使用 PrimaryColour。</span><br><span class="line">某一代码的 &lt;时长&gt; 是相对于它之前的代码而言的，如上述例子中，字幕显示后的第 0 秒到第 1 秒是前面部分的效果，第 1 秒到第 3 秒是后面部分的效果。</span><br><span class="line">其高亮效果是把控制范围内的文字一次性全部变色。例如，&#123;\k10&#125;你&#123;\k10&#125;要&#123;\k10&#125;这&#123;\k10&#125;样&#123;\k10&#125;才&#123;\k10&#125;能&#123;\k10&#125;有&#123;\k10&#125;正&#123;\k10&#125;常&#123;\k10&#125;的&#123;\k10&#125;卡&#123;\k10&#125;拉&#123;\k10&#125; OK &#123;\k10&#125;效&#123;\k10&#125;果。</span><br><span class="line"></span><br><span class="line">\kf&lt;时长&gt;、\K&lt;时长&gt;</span><br><span class="line">其他部分与 \k&lt;时长&gt; 相同。其高亮效果是把控制范围内的文字从左到右流畅变色。例如，&#123;\K300&#125;你这样就可以有正常的卡拉 OK 效果。</span><br><span class="line"></span><br><span class="line">\ko&lt;时长&gt;</span><br><span class="line">其他部分与 \k&lt;时长&gt; 相同。高亮之前边框被去除，高亮之后再显示边框。</span><br><span class="line"></span><br><span class="line">\kt&lt;时长&gt;</span><br><span class="line">它重新定义之后的 \k、\kf、\K、\ko 所相对的开始时间。例如，&#123;\k100&#125;壹&#123;\kt300\k100&#125;貳&#123;\kt100\k100&#125;叁，第 0 秒到第 1 秒高亮 壹，第 1 秒到第 2 秒高亮 叁，第 3 秒到第 4 秒高亮 貳。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\q&lt;方式&gt;</span><br><span class="line">&lt;方式&gt; 是一个数字，与 WrapStyle 相同。</span><br></pre></td></tr></table></figure>
+
+
+<p>0：智能换行，分割比较均匀，上面的行较长。<br>1：从行尾的词换行，只有 \N 能强制换行。<br>2：不换行，\n 和 \N 强制换行。<br>3：和 0 一样智能换行，下面的行较长。<br>\r[&lt;样式名&gt;]<br>&lt;样式名&gt; 是在 [v4 Styles+] 中定义的样式名，它会把这行中所有它之后的文本设置为样式名对应的样式。如果没有写 &lt;样式名&gt; 或者 &lt;样式名&gt; 没有被定义，将会设置为默认样式。<br>例如，假设已定义了把字体设为蓝色的 Blue 样式，{\1c&amp;HFF&amp;}这里是红色{\rBlue}这里是蓝色{\1c&amp;HFF00&amp;}这里是绿色。</p>
+<p>\t([<t1>,<t2>,][&lt;加速度&gt;,]&lt;样式覆写代码&gt;)<br>它可以将某一样式从某种效果逐渐地动态地转化到另一种效果。</p>
+<p><t1> 和 <t2> 表示相对于字幕显示时间的开始动画与结束动画的毫秒数，可选，如果没有写或者两者都是 0，则默认是在字幕的整段时间内进行动画效果。</p>
+<p>在 <t1> 之前，其样式为该代码之前设置的样式。<br>在 <t1> 和 <t2> 之间，其样式由之前的样式转变为 &lt;样式覆写代码&gt; 的样式。<br>在 <t1> 之后，其样式保持为 &lt;样式覆写代码&gt; 的样式。<br>&lt;加速度&gt; 可以修改变换效果的线性程度，由此式计算：pow((t - t1) &#x2F; (t2 - t1), accel)，其中 t 为当前字幕已存在的时间，accel 为 &lt;加速度&gt;。从结果来看，&lt;加速度&gt; 等于 1 时为线性变换，大于 1 时先慢后快，大于 0 小于 1 时先慢后快。可选，默认为 1。</p>
+<p>只有以下 &lt;样式覆写代码&gt; 可以进行转化：</p>
+<p>\bord&lt;宽度&gt;、\xbord&lt;宽度&gt;、\ybord&lt;宽度&gt;<br>\shad&lt;深度&gt;、\xshad&lt;深度&gt;、\yshad&lt;深度&gt;<br>\be&lt;强度&gt;<br>\blur&lt;强度&gt;<br>\fs&lt;字体尺寸&gt;<br>\fs+&lt;数值&gt;、\fs-&lt;数值&gt;<br>\fscx&lt;百分数&gt;、\fscy&lt;百分数&gt;<br>\fsp&lt;像素值&gt;<br>\fr&lt;度数&gt;、\frx&lt;度数&gt;、\fry&lt;度数&gt;、\frz&lt;度数&gt;<br>\fax&lt;因数&gt;、\fay&lt;因数&gt;<br>[&lt;颜色序号&gt;]c[&amp;][H]<BBGGRR>[&amp;]<br>&lt;颜色序号&gt;a[&amp;][H]<AA>[&amp;]<br>\alpha<AA><br>[i]clip(<x1>,<y1>,<x2>,<y2>)<br>当一行中含有多个 &lt;样式覆写代码&gt; 相同但 <t1> 和 <t2> 不同的 \t 时，结果比较迷。<br>当一行中含有 \t 时会忽略字幕重叠冲突的检测。</p>
+<p>\move(<x1>,<y1>,<x2>,<y2>[,<t1>,<t2>])<br>提供字幕的移动效果。<x1>,<y1> 是开始点坐标，<x2>,<y2> 是结束点坐标。<br><t1> 和 <t2> 是相对于字幕显示时间的开始运动与结束运动的毫秒时间。</p>
+<p>在 <t1> 之前，字幕定位在 <x1>,<y1>。<br>在 <t1> 与 <t2> 之间，字幕从 <x1>,<y1> 均速移动到 <x2>,<y2>。<br>在 <t2> 之后，字幕定位在 <x2>,<y2>。<br>当 <t1> 和 <t2> 没写或者都是 0 时，则在字幕的整段时间内均速移动。<br>当一行中有多个 \pos 和 \move 时，以第一个为准。<br>当 \move 和 Effect 效果同时存在时，结果比较迷。<br>当一行中含有 \move 时会忽略字幕重叠冲突的检测。</p>
+<p>\pos(<x>,<y>)<br>将字幕定位在坐标点 <x>,<y>。屏幕的左上角为 0,0。字幕的「定位点」由 \a&lt;位置&gt;、\an&lt;位置&gt; 和 Alignment 决定。例如：</p>
+<p>\an1 的定位点在字幕的左下角。<br>\an2 的定位点在字幕底边的正中间。<br>\an3 的定位点在字幕的右下角。<br>\an4 的定位点在字幕左边线的正中间。<br>\an5 的定位点在字幕垂直水平的正中间。<br>\an6 的定位点在字幕右边线的正中间。<br>\an7 的定位点在字幕的左上角。<br>\an8 的定位点在字幕顶边的正中间。<br>\an9 的定位点在字幕的右上角。<br>当一行中有多个 \pos 和 \move 时，以第一个为准。事实上 \pos(<x>,<y>) 相当于 \move(<x>,<y>,<x>,<y>,0,0)。<br>当一行中含有 \pos 时会忽略字幕重叠冲突的检测。</p>
+<p>\org(<x>,<y>)<br>设置字幕的原点为 <x>,<y>。字幕的原点会影响其旋转效果，字幕是基于原点来旋转的。当未设置时默认为字幕的定位点。<br>当一行中有多个 \org 时，以第一个为准。<br>原点就是定位点，定位点就是原点。</p>
+<p>\fad(<t1>,<t2>)<br>提供简单的淡入淡出效果。t1 为淡入时间长度，t2 为淡出时间长度。单位为毫秒。<br>当一行中有多个 \fad 或 \fade 时，以第一个为准。</p>
+<p>\fade(<a1>,<a2>,<a3>,<t1>,<t2>,<t3>,<t4>)<br>提供复杂的淡入淡出效果。单位为毫秒。</p>
+<p>在 <t1> 之前，透明度为 <a1>。<br>在 <t1> 与 <t2> 之间，透明度由 <a1> 变化到 <a2>。<br>在 <t2> 与 <t3> 之间，透明度为 <a2>。<br>在 <t3> 与 <t4> 之间，透明度由 <a2> 变化到 <a3>。<br>在 <t4> 之后，透明度为 <a3>。<br>当 \fade 只有两个参数时，其效果与 \fad 一致。<br>当一行中有多个 \fad 或 \fade 时，以第一个为准。</p>
+<p>[i]clip(<x1>,<y1>,<x2>,<y2>)<br>定义一个矩形，只有在该矩形范围内的内容可见或不可见。<x1>,<y1> 为矩形的左上角，<x2>,<y2> 为矩形的右下角。\clip 是矩形范围内可见，\iclip 是矩形范围内不可见。<br>当一行中有多个 [i]clip 时，以最后一个为准。</p>
+<p>[i]clip([&lt;等级&gt;,]&lt;绘图命令&gt;)<br>定义一个绘画图形，只有在该绘画图形范围内的内容可见或不可见。&lt;等级&gt; 和 &lt;绘图命令&gt; 的含义与 \p 相同。</p>
+<p>\p&lt;等级&gt;<br>进入绘图模式且同时指定坐标的缩小等级。缩小等级由此式计算：pow(2, &lt;等级&gt; - 1)。例如，\p4，pow(2, 4 - 1) &#x3D; 8，即将原坐标缩小至 1&#x2F;8。<br>当 &lt;等级&gt; 为 0 时，表示退出绘图模式，之后的文本按普通的解析。<br>绘图命令是写在 {\p&lt;等级&gt;} 大括号外面的部分。例如，{\p1}m 0 0 l 0 100 l 100 100 l 100 0 l 0 0{\p0}。而 [i]clip 代码中的绘图命令是写在 clip 之后的括号里的。例如，{\clip(4, m 0 0 l 0 100 l 100 100 l 100 0 l 0 0)}绘图命令在括号里。</p>
+<p>以下列举了所有绘图命令：</p>
+<p>m <x> <y><br>将当前绘制点移至 <x>,<y>，同时闭合已有的图形，即开始绘制新图形。所有绘图都应由该命令开头。<br>n <x> <y><br>将当前绘制点移至 <x>,<y>，同时不闭合已有的图形。<br>l <x> <y><br>在当前绘制点和 <x>,<y> 之间画一条直线，并把当前绘制点设置为 <x>,<y>，即从这个点继续之后的绘图。<br>b <x1> <y1> <x2> <y2> <x3> <y3><br>在当前绘制点和 <x3>,<y3> 之间画一条三次贝塞尔曲线，并把当前绘制点设置为 <x3>,<y3>，即从这个点继续之后的绘图。其中 <x1>,<y2> 和 <x1>,<y2> 为该贝塞尔曲线的控制点。<br>s <x1> <y1> <x2> <y2> <x3> <y3> … <xN> <yN><br>在当前绘制点和 <xN>,<yN> 之间画一条三次均匀 B样条，并把当前绘制点设置为 <xN>,<yN>，即从这个点继续之后的绘图。至少包含三个坐标。<br>p <x> <y><br>延长 B样条到 <x>,<y>。例如，m 0 0 s 100 0 100 100 0 100 p 0 0 相当于 m 0 0 s 100 0 100 100 0 100 0 0。<br>c<br>闭合的 B样条曲线。例如，m 0 0 s 100 0 100 100 0 100 c，这里的 c 就相当于 p 0 0 100 0 100 100。<br>以下是绘图命令的注意事项：</p>
+<p>除了在 [i]clip 中，绘图命令必须被包含在 {\p&lt;等级&gt;} 和 {\p0} 之间。<br>所有绘图都应由 m <x> <y> 命令开头。<br>所有图形最后必须闭合。<br>所有没闭合的图形会被自动地在起点和终点之间添加直线来闭合。<br>如果一个对话行中的多个图形有重叠，重叠部分会进行异或运算。<br>如果多个相同的命令连在一起，可以把之后的命令符省略，只保留坐标。例如，l 100 100 l 200 200 可以写成 l 100 100 200 200。但是 s 命令不能省略，省略的话会导致绘制出不同的图形。<br>图形的坐标系是相对于当前基线位置（\pbo）和对齐（Alignment）模式。<br>\pbo<y><br>设置图形的基线偏移值。默认情况下所有图形都是基于当前的基线，该命令可以将图形相对于基线上移或下移。<y> 小于 0 时上移，大于 0 时下移。</p>
+<h2 id="5-Fonts-与-Graphics-部分"><a href="#5-Fonts-与-Graphics-部分" class="headerlink" title="5. [Fonts] 与 [Graphics] 部分"></a>5. [Fonts] 与 [Graphics] 部分</h2><h3 id="5-1-Fonts-部分"><a href="#5-1-Fonts-部分" class="headerlink" title="5.1 [Fonts] 部分"></a>5.1 [Fonts] 部分</h3><p>Fonts 可以在 SSA 文件中嵌入经过 UUEncoding 编码为文本的字体文件，但只支持嵌入 TrueType 字体（即 .ttf 文件），每个嵌入的字体文件以单行如下格式开头：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fontname: &lt;字体名称&gt;_[B][I]&lt;字体字符集&gt;.ttf</span><br></pre></td></tr></table></figure>
+
+<p><strong>其详解如下：</strong></p>
+<ol>
+<li>fontname 必须小写，大写可能会被认为是字体文本编码的一部分；</li>
+<li><code>&lt;字体名称&gt;_[B][I]&lt;字体字符集&gt;.ttf</code> 是 SSA 在保存字体文件时所用的文件名，其中 <code>&lt;字体名称&gt;</code> 就是原 TrueType 字体名，<code>B</code> 表示粗体，<code>I</code> 表示斜体，这两个值为可选项，<code>&lt;字体字符集&gt;</code> 是一个表示字体编码（字符集）的数字，最后加上字体格式后缀 <code>.ttf</code>。例如：<code>fontname: chaucer_B0.ttf</code>，&#96;fontname: comic_0.ttf；</li>
+<li><code>fontname: &lt;字体名称&gt;_[B][I]&lt;字体字符集&gt;.ttf</code> 之后是一些可打印的字符组成的行，代表组成该字体文件的二进制值，每一行有 80 个字符，最后一行可能会短一点；</li>
+<li>从二进制转换到可打印字符使用 Uuencoding 方式；</li>
+</ol>
+<h3 id="5-2-Graphics-部分"><a href="#5-2-Graphics-部分" class="headerlink" title="5.2 [Graphics] 部分"></a>5.2 [Graphics] 部分</h3><p>Graphics 可以在 SSA 文件中嵌入经过 UUEncoding 编码为文本的图片文件，二进制图像文件以文本编码是低效的，但可以保证 SSA 脚本可以被任何文本编辑器处理。每个嵌入的图像文件以单行如下格式开头：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename: &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其详解如下：</strong></p>
+<ol>
+<li>fontname 必须小写，大写可能会被认为是字体文本编码的一部分；</li>
+<li>&lt;文件名&gt; 是 SSA 在保存图像文件时所用的文件名，与 [Events] 事件部分中提及的图片名称一致；</li>
+<li>SSA 会把脚本中找到的任何文件保存到 SSA 的程序目录中的<code>Pictures</code>子目录中。例如：<code>C: \ Program Files \ Sub Station Alpha v4.00 \ Pictures</code> 。SSA 会试图先从脚本指定的路径去加载文件，没有找到时就会到 <code>Pictures</code> 这个子目录里去找；</li>
+<li><code>filename: &lt;文件名&gt;</code> 之后是一些可打印的字符组成的行，代表组成该图像文件的二进制值，格式和内嵌字体文件相同；</li>
+</ol>
+<h3 id="5-3-UUEncoding-编码细节"><a href="#5-3-UUEncoding-编码细节" class="headerlink" title="5.3 UUEncoding 编码细节"></a>5.3 UUEncoding 编码细节</h3><p>SSA 中实现字体文件和图片文件的嵌入采用的是 UUEncoding 编码形式。</p>
+<p>UUEncoding 编码从二进制文件中一次取 3 字节，然后把这 3 字节的 24 位转换为 4 个 6 位的数字，把这 4 个数字都加上 33，再把这 4 个数字所对应的 ASCII 字符写入脚本文件。每一行有 80 个字符，除了最后一行可能会短一点。</p>
+<p>加上 33 的偏移意味着在编码后的输出中不会出现小写字符，这也是 fontname 行要小写的原因。</p>
+<p>如果被编码的文件的长度不是 3 的倍数，那么，如果文件长度是奇数，最后一个字节将乘十六进制的 100，然后得到的数字最多 12 位将按上述过程转换为 2 个字符；如果文件长度是偶数，最后一个字节将乘十六进制的 10000，然后得到的数字最多 18 位将按上述过程转换为 3 个字符。</p>
+<p>内嵌文件中没有终止符。如果后面有新的章节名，或者有另一个内嵌文件行，或者已经到脚本的最后了，那么该内嵌文件就被认为已经完成了</p>
+<h2 id="6-ASS-字幕实例"><a href="#6-ASS-字幕实例" class="headerlink" title="6. ASS 字幕实例"></a>6. ASS 字幕实例</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/" data-id="clrw1mrrl0000icgacx9agkn7" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/27/%E5%B8%B8%E8%A7%81%E5%BD%B1%E8%A7%86%E7%89%87%E6%BA%90%E6%A0%87%E7%AD%BE%E8%A7%A3%E9%87%8A/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/27/%E5%B8%B8%E8%A7%81%E5%BD%B1%E8%A7%86%E7%89%87%E6%BA%90%E6%A0%87%E7%AD%BE%E8%A7%A3%E9%87%8A/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/ASS%E5%AD%97%E5%B9%95%E6%A0%B7%E5%BC%8F/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/FFmpeg%E5%AA%92%E4%BD%93%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/Windows%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/27/Windows%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
