@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#8b6cef","title":"luomo's blog","author":"luomo","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/logo.png"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Changelog":"/changelog"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"人生如逆旅，我亦是行人。","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":false,"hide_header":false},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","CV鼓励师"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.6"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#8b6cef","title":"luomo's blog","author":"luomo","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/logo.png"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Changelog":"/changelog"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"人生如逆旅，我亦是行人。","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":false,"hide_header":false},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["One","Two","Three","CV鼓励师"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.6"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
@@ -228,6 +228,10 @@
             </span>
         
         
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
     </div>
 
     
@@ -378,6 +382,15 @@
         </div>
 
         
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B9%B6%E8%A1%8C%E9%85%8D%E7%BD%AE%E4%B8%8D%E6%AD%A3%E7%A1%AE"><span class="nav-text">1. 应用程序无法启动，因为应用程序的并行配置不正确</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%90%AF%E7%94%A8Windows-Modules-Installer%E6%9C%8D%E5%8A%A1"><span class="nav-text">1.1 启用Windows Modules Installer服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Microsoft-Visual-C-%E8%BF%90%E8%A1%8C%E5%BA%93"><span class="nav-text">1.2 安装Microsoft Visual C++运行库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9B%B4%E6%94%B9Win11%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F%E4%B8%BAWin10%E9%A3%8E%E6%A0%BC"><span class="nav-text">2. 更改Win11右键菜单样式为Win10风格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%89%8B%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.1 手动修改注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-cmd%E5%91%BD%E4%BB%A4%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.2 cmd命令修改注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%9A%E8%BF%87%E8%BD%AF%E4%BB%B6%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.3 通过软件修改注册表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AD%A4%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E5%9C%A8%E6%AD%A4%E8%AE%BE%E5%A4%87%E4%B8%8A%E8%BF%90%E8%A1%8C"><span class="nav-text">3. 此应用无法在此设备上运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%94%B5%E8%84%91%E6%80%A7%E8%83%BD%E8%B6%B3%E5%A4%9F%E4%BD%86%E6%92%AD%E6%94%BE4K%E8%A7%86%E9%A2%91%E5%8D%A1%E9%A1%BF"><span class="nav-text">4. 电脑性能足够但播放4K视频卡顿</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
     </div>
 </div>
 
@@ -412,7 +425,17 @@
             
 
             
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
 
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
             
         </div>
     </div>
@@ -423,10 +446,14 @@
 
     <!-- post tools -->
     
-        <div class="post-tools right-toc">
+        <div class="post-tools left-toc">
             <div class="post-tools-container border-box">
     <ul class="tools-list border-box">
         <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
         
 
         <!-- PC go comment -->
@@ -463,6 +490,10 @@
 
     <ul class="exposed-tools-list border-box">
         
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
 
         
 
@@ -489,6 +520,17 @@
     
 
     <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B9%B6%E8%A1%8C%E9%85%8D%E7%BD%AE%E4%B8%8D%E6%AD%A3%E7%A1%AE"><span class="nav-text">1. 应用程序无法启动，因为应用程序的并行配置不正确</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%90%AF%E7%94%A8Windows-Modules-Installer%E6%9C%8D%E5%8A%A1"><span class="nav-text">1.1 启用Windows Modules Installer服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Microsoft-Visual-C-%E8%BF%90%E8%A1%8C%E5%BA%93"><span class="nav-text">1.2 安装Microsoft Visual C++运行库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9B%B4%E6%94%B9Win11%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E6%A0%B7%E5%BC%8F%E4%B8%BAWin10%E9%A3%8E%E6%A0%BC"><span class="nav-text">2. 更改Win11右键菜单样式为Win10风格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%89%8B%E5%8A%A8%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.1 手动修改注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-cmd%E5%91%BD%E4%BB%A4%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.2 cmd命令修改注册表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%80%9A%E8%BF%87%E8%BD%AF%E4%BB%B6%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="nav-text">2.3 通过软件修改注册表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AD%A4%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E5%9C%A8%E6%AD%A4%E8%AE%BE%E5%A4%87%E4%B8%8A%E8%BF%90%E8%A1%8C"><span class="nav-text">3. 此应用无法在此设备上运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%94%B5%E8%84%91%E6%80%A7%E8%83%BD%E8%B6%B3%E5%A4%9F%E4%BD%86%E6%92%AD%E6%94%BE4K%E8%A7%86%E9%A2%91%E5%8D%A1%E9%A1%BF"><span class="nav-text">4. 电脑性能足够但播放4K视频卡顿</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
     
 </main>
 
@@ -525,6 +567,10 @@
 
 
         <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
         
 
         <!-- copyright-info -->
