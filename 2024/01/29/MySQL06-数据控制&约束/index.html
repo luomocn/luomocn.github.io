@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="luomo">
+    
+    <title>
+        
+            MySQL06-数据控制&amp;约束 |
+        
+        luomo&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/luomo.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#8b6cef","title":"luomo's blog","author":"luomo","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/logo.png"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Changelog":"/changelog"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"人生如逆旅，我亦是行人。","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":false,"hide_header":false},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"CV鼓励师"},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2023,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":["/css/luomo.css"],"js":["/js/luomo.js"]},"root":"","version":"4.0.6"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               luomo&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/changelog"
+                            >更新日志</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/changelog"
+                    >更新日志</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        MySQL06-数据控制&amp;约束
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">luomo</span>
+                                
+                                    <span class="author-badge">CV鼓励师</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-01-29 20:43:14</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Mon Jan 29 2024 20:52:33 GMT+0800">2024-01-29 20:52:33</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">MySQL学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>3.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>13 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="1-数据控制-DCL"><a href="#1-数据控制-DCL" class="headerlink" title="1. 数据控制-DCL"></a>1. 数据控制-DCL</h2><p>数据控制类 SQL 开发人员操作的比较少，主要是DBA（Database Administrator 数据库管理员）使用。</p>
+<h3 id="1-1-用户管理"><a href="#1-1-用户管理" class="headerlink" title="1.1 用户管理"></a>1.1 用户管理</h3><ol>
+<li><strong>查询用户</strong>，MySQL服务器的用户信息存储在 mysql 数据库中的 user 表中，可以通过查询该表查询 mysql 服务器的用户信息</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入 mysql 数据库</span><br><span class="line">use mysql;</span><br><span class="line"># 查询 user 表</span><br><span class="line">select * from user;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>创建用户</strong>，其中用户名和用户密码可以自定义，主机名为 <code>localhost</code> 时表示本地主机，该用户只可以从本地主机访问数据库服务器，主机名为 <code>%</code> 时表示任意主机，该用户可以从任意主机访问数据库服务器；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># @ 符号前后不能有空格，否则创建失败</span><br><span class="line">create user &#x27;用户名&#x27;@&#x27;主机名&#x27; identified by &#x27;用户密码&#x27;;</span><br><span class="line"></span><br><span class="line"># 创建用户test，密码为1234，只能在当前主机localhost访问</span><br><span class="line">create user &#x27;test&#x27;@&#x27;localhost&#x27; identified by &#x27;1234&#x27;;</span><br><span class="line"># 创建用户test，密码为1234，能在任意主机访问</span><br><span class="line">create user &#x27;test&#x27;@&#x27;%&#x27; identified by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>修改用户密码</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &#x27;用户名&#x27;@&#x27;主机名&#x27; identified with mysql_native_password by &#x27;新用户密码&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>删除用户</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user &#x27;用户名&#x27;@&#x27;主机名&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-权限控制"><a href="#1-2-权限控制" class="headerlink" title="1.2 权限控制"></a>1.2 权限控制</h3><ol>
+<li><strong>查询权限</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for &#x27;用户名&#x27;@&#x27;主机名&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>授予权限</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grant 权限1,权限2... on 数据库名.表名 to &#x27;用户名&#x27;@&#x27;主机名&#x27;;</span><br><span class="line"></span><br><span class="line"># 授予用户 test 在 student 数据库 user 表的插入和修改权限</span><br><span class="line">grant insert,update on student.user to &#x27;test&#x27;@&#x27;localhost&#x27;;</span><br><span class="line"># 授予用户 test 在 student 数据库所有表的所有权限</span><br><span class="line">grant all on student.* to &#x27;test&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>撤销权限</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">revoke 权限1,权限2... on 数据库名.表名 from &#x27;用户名&#x27;@&#x27;主机名&#x27;;</span><br><span class="line"></span><br><span class="line"># 撤销用户 test 在 student 数据库 user 表的插入和修改权限</span><br><span class="line">revoke insert,update on student.user from &#x27;test&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>其中，MySQL中常用的权限有以下这些，更多权限可以参考<a class="link"   target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html"  title="官方文档">官方文档<i class="fas fa-external-link-alt"></i></a>：</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ALL，ALL PRIVILEGES</td>
+<td>所有权限</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td>查询数据</td>
+</tr>
+<tr>
+<td>INSERT</td>
+<td>插入数据</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>修改数据</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除数据</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>修改表</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>删除数据库&#x2F;表&#x2F;视图</td>
+</tr>
+<tr>
+<td>CREATE</td>
+<td>创建数据库&#x2F;表</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<ol>
+<li>授予权限时，多个权限之间用逗号分隔；</li>
+<li>授予权限时，数据库名和表名可以用 <code>*</code> 通配表示，代表所有，如授予用户 test 在所有数据库所有表的插入和修改权限：<code>grant insert,update on *.* to &#39;test&#39;@&#39;localhost&#39;;</code>；</li>
+</ol>
+<h2 id="2-约束"><a href="#2-约束" class="headerlink" title="2. 约束"></a>2. 约束</h2><p>约束是为防止错误的数据被插入到数据表，作用于表中字段上的规则，用于限制存储在表中的数据，也即表的<strong>约束</strong>实际上就是<strong>表中数据的限制条件</strong>。约束可以保证数据表中数据的<strong>正确性、唯一性、有效性和完整性</strong>。约束是作用于表中字段上的，可以在创建表或修改表的时候添加约束。常见约束如下：</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>NOT NULL</td>
+<td>限制该字段的数据不能为null</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>UNIQUE</td>
+<td>保证该字段的所有数据都是唯一、不重复的</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>PRIMARY KEY</td>
+<td>主键是一行数据的唯一标识，要求非空且唯一</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>DEFAULT</td>
+<td>保存数据时，如果未指定该字段的值，则采用默认值</td>
+</tr>
+<tr>
+<td>检查约束（8.0.1版本后支持）</td>
+<td>CHECK</td>
+<td>保证字段值满足某一个条件</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>FOREIGN KEY</td>
+<td>用来让两张图的数据之间建立连接，保证数据的一致性和完整性</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-列级约束和表级约束"><a href="#2-1-列级约束和表级约束" class="headerlink" title="2.1 列级约束和表级约束"></a>2.1 列级约束和表级约束</h3><p>MySQL中的约束分为为<strong>列级约束和表级约束</strong>：<br>列级约束有：非空、唯一、主键、默认、检查、外键（外键约束在语法上支持，但没有效果）<br>表级约束有：唯一、主键、检查、外键</p>
+<p><strong>区别：</strong></p>
+<ol>
+<li>列级约束是字段级约束，只能应用于一列上，表级约束是字段间约束，可以应用于一列上，也可以应用在一个表中的多个列上；</li>
+<li>表级约束可以给约束起名，以主键约束为例，格式为以 <code>constraint 约束名 primary key (字段1, ...) </code>，添加约束名可以方便以后通过这个名字来删除这个约束；</li>
+<li>列级约束和表级约束在<strong>添加位置</strong>上也有所不同，列级约束直接在 <code>字段名 数据类型</code> 后面追加约束，用空格分隔，表级约束则与字段定义用 <code>,</code> 分隔，在字段定义的最下面，大致位置如下所示；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 表名 (</span><br><span class="line">字段1 字段类型 列级约束,</span><br><span class="line">字段2 字段类型 列级约束,</span><br><span class="line">表级约束(字段1, 字段2)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-1-主键约束"><a href="#2-1-主键约束" class="headerlink" title="2.1 主键约束"></a>2.1 主键约束</h3><p><strong>主键约束（PRIMARY KEY,PK）</strong>是指具有<strong>唯一标识表中每一行的值的一列</strong>或一组列的主键。被标识为主键的数据具有唯一性、非空性和最小化原则，用于强制实现表的实体完整性，类似于身份证号。</p>
+<p>使用主键的时需要注意以下几点：</p>
+<ol>
+<li>一个表只能定义一个主键约束（约束只能有一个，但可以作用到好几个字段)；</li>
+<li>给某个字段添加主键约束之后，该字段不能重复也不能为空，效果和 <code>not null unique</code> 约束相同，但是本质不同；</li>
+<li>主键约束会默认添加索引(index)；</li>
+</ol>
+<p>主键也分为<strong>单字段主键</strong>和<strong>多字段联合主键</strong>，具体要求如下：</p>
+<ol>
+<li>一个字段名只能在联合主键字段表中出现一次；</li>
+<li>联合主键不能包含不必要的多余字段，以满足最小化原则；</li>
+</ol>
+<p><strong>添加列级主键约束</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">-- 列级主键约束</span><br><span class="line">字段名 数据类型 primary key;</span><br><span class="line">-- 表级主键约束</span><br><span class="line">create table 表名 (</span><br><span class="line">字段名 字段类型,</span><br><span class="line">字段名 字段类型,</span><br><span class="line">...</span><br><span class="line">primary key (字段名,字段名,...)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table 表名 modify column 字段名 数据类型 primary key;</span><br><span class="line">-- 方法二</span><br><span class="line">alter table 表名 add primary key(字段名);</span><br><span class="line"></span><br><span class="line"># 创建表时添加约束</span><br><span class="line">-- 方法一，列级主键</span><br><span class="line">create table student (</span><br><span class="line">id int primary key,</span><br><span class="line">name varchar(20)</span><br><span class="line">);</span><br><span class="line">-- 方法二，表级主键</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20),</span><br><span class="line">primary key(id)</span><br><span class="line">);</span><br><span class="line">-- 添加表级主键时可设置多字段联合主键，字段间用逗号分隔</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20),</span><br><span class="line">primary key (id, name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table student modify column id int primary key;</span><br><span class="line">-- 方法二</span><br><span class="line">alter table student add primary key(id);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除主键约束</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 drop primary key;</span><br><span class="line">示例：</span><br><span class="line">alter table student drop primary key;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-1-主键自增长"><a href="#2-1-1-主键自增长" class="headerlink" title="2.1.1 主键自增长"></a>2.1.1 主键自增长</h4><p>当主键定义为自增长后，主键的值就不需要自己再输入数据了，而是由数据库系统根据定义自动赋值，每增加一条记录，主键就会自动根据设置的步长进行增长。在MySQL中，自增长的关键字是 AUTO_INCREMENT，语法格式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 auto_increment;</span><br><span class="line"></span><br><span class="line"># 例如：</span><br><span class="line">create table student (</span><br><span class="line">id int primary key auto_increment,</span><br><span class="line">name varchar(20)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 还可以设置自增起始数据：</span><br><span class="line">create table student (</span><br><span class="line">id int primary key auto_increment,</span><br><span class="line">name varchar(20)</span><br><span class="line">) auto_increment=0001;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-非空约束"><a href="#2-2-非空约束" class="headerlink" title="2.2 非空约束"></a>2.2 非空约束</h3><p>非空约束（NOT NULL）是指强制字段的值不能为空。</p>
+<p><strong>添加非空约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">字段名 数据类型 not null;</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table 表名 modify column 字段名 数据类型 not null;</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"># 创建表时添加约束</span><br><span class="line">create table student (</span><br><span class="line">id int</span><br><span class="line">name varchar(20) not null</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table student modify column name varchar(20) not null;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除非空约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 modify 字段名 数据类型 null;</span><br><span class="line">示例：</span><br><span class="line">alter table student modify name varchar(20) null;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-唯一约束"><a href="#2-3-唯一约束" class="headerlink" title="2.3 唯一约束"></a>2.3 唯一约束</h3><p>唯一约束（UNIQUE）用于保证数据表中字段的值具有唯一性，即表中字段的值不能重复出现，允许出现空值，但空值只能出现一次。</p>
+<p><strong>添加唯一约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">字段名 数据类型 unique;</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table 表名 modify column 字段名 数据类型 unique;</span><br><span class="line">-- 方法二</span><br><span class="line">alter table 表名 add unique(字段名);</span><br><span class="line"></span><br><span class="line"># 创建表时添加约束</span><br><span class="line">-- 列级唯一约束</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20) unique</span><br><span class="line">);</span><br><span class="line">-- 表级唯一约束，当在表级唯一约束中设置两个字段名时，新纪录中的两个字段与这两个字段原有数据都相同则报错，只有一个相同不报错</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20),</span><br><span class="line">unique(id,name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table student modify column name varchar(20) unique;</span><br><span class="line">-- 方法二</span><br><span class="line">alter table student add unique(name);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除唯一约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 drop index 字段名;</span><br><span class="line">示例：</span><br><span class="line">alter table student drop index number;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-默认约束"><a href="#2-4-默认约束" class="headerlink" title="2.4  默认约束"></a>2.4  默认约束</h3><p>默认值约束（DEFAULT）用于指定数据表中字段的默认值，当向表中插入一条新的记录时没有给该字段赋值，那么数据库系统会自动为这个字段插人默认值，默认约束常常用在某字段中数据存在大量重复值的情况。</p>
+<p><strong>添加默认约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">字段名 数据类型 default 默认值;</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table 表名 modify column 字段名 数据类型 default 默认值;</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"># 创建表时添加约束</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20),</span><br><span class="line">gender varchar(10) default &#x27;male&#x27;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table student modify column gender varchar(10) default &#x27;male&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除默认约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 方法一</span><br><span class="line">alter table 表名 modify 字段名 数据类型;</span><br><span class="line">示例：</span><br><span class="line">alter table student modify gender varchar(10);</span><br><span class="line"></span><br><span class="line"># 方法二</span><br><span class="line">alter table 表名 alter column 字段名 drop default;</span><br><span class="line">示例：</span><br><span class="line">alter table student alter column gender drop default;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-检查约束"><a href="#2-5-检查约束" class="headerlink" title="2.5 检查约束"></a>2.5 检查约束</h3><p>检查约束（CHECK）通过在 check 后面添加限定条件表达式实现对插入数据的检查，在更新表数据的时候，系统会检查更新后的数据行是否满足 CHECK 约束中的限定条件，可以分别对列或表实施 CHECK 约束。</p>
+<p><strong>添加检查约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">字段名 数据类型 check(限定条件表达式);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table 表名 modify column 字段名 数据类型 check(限定条件表达式);</span><br><span class="line">-- 方法二</span><br><span class="line">alter table 表名 add check(限定条件表达式);</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"># 创建表时添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">create table student (</span><br><span class="line">name varchar(20),</span><br><span class="line">age varchar(20) check(age &gt; 0 and age &lt; 120)</span><br><span class="line">);</span><br><span class="line">-- 方法二，表级检查约束，可同时对表中多个字段进行限制，限制条件间用 and 连接</span><br><span class="line">create table student (</span><br><span class="line">id int,</span><br><span class="line">name varchar(20),</span><br><span class="line">age varchar(20)</span><br><span class="line">check(id &gt; 0 and age &gt; 0 and age &lt; 120 )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">-- 方法一</span><br><span class="line">alter table student modify column age varchar(20) check(age &gt; 0 and age &lt; 120);</span><br><span class="line">-- 方法二</span><br><span class="line">alter table student add check(age &gt; 0 and age &lt; 120);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除检查约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 drop check 检查约束名;</span><br><span class="line">示例：</span><br><span class="line">alter table student drop check student_chk_1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-外键约束"><a href="#2-6-外键约束" class="headerlink" title="2.6 外键约束"></a>2.6 外键约束</h3><p>外键约束（FOREIGN KEY）用来在两个表的数据之间建立关联，可以是一列或者多列，一个表可以有一个或多个外键。</p>
+<p><strong>添加外键约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 创建表时添加约束</span><br><span class="line">constraint 外键名 foreign key (从表外键字段) references 主表 (主键字段)</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table 从表名 add constraint 外键名 foreign key (从表外键字段) references 主表 (主键字段);</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">-- 创建主表student，从表class，使class表的 studentid 字段作为外键关联 student 表的id字段</span><br><span class="line"></span><br><span class="line"># 创建表时添加约束</span><br><span class="line">create table class (</span><br><span class="line">classid int primary key,</span><br><span class="line">studentid int</span><br><span class="line">constraint fk_class_studentid foreign key (studentid) references student(id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 创建表后添加约束</span><br><span class="line">alter table class add constraint fk_class_studentid foreign key (studentid) references student(id);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除外键约束：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 从表名 drop foreign key 外键名;</span><br><span class="line">示例：</span><br><span class="line">alter table class drop foreign key fk_class_studentid;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-1-外键删除-更新行为"><a href="#2-6-1-外键删除-更新行为" class="headerlink" title="2.6.1 外键删除&#x2F;更新行为"></a>2.6.1 外键删除&#x2F;更新行为</h4><p>建立外键是为了保证数据的完整性和一致性，如果主表中的数据被删除或修改，从表中对应的数据也会发生相应变化，这些变化就由外键删除&#x2F;更新行为控制，可以在创建外键时定义其删除&#x2F;更新行为，如果未特定定义，默认值为 RESTRICT，其具体内容如下：</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NO ACTION &#x2F; RESTRICT</td>
+<td>当在父表中删除&#x2F;更新对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除&#x2F;更新</td>
+</tr>
+<tr>
+<td>CASCADE</td>
+<td>当在父表中删除&#x2F;更新对应记录时，首先检查该记录是否有对应外键，如果有也删除&#x2F;更新外键在子表中的记录</td>
+</tr>
+<tr>
+<td>SET NULL</td>
+<td>当在父表中删除&#x2F;更新对应记录时，首先检查该记录是否有对应外键，如果有则设置子表中该外键值为null（要求该外键允许为null）</td>
+</tr>
+<tr>
+<td>SET DEFAULT</td>
+<td>父表有变更时，子表将外键设为一个默认值（Innodb不支持）</td>
+</tr>
+</tbody></table>
+<p><strong>添加外键删除&#x2F;更新行为：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 从表名 add constraint 外键名 foreign key (从表外键字段) references 主表 (主键字段) on update 更新行为 on delete 删除行为;</span><br><span class="line">例如：</span><br><span class="line">alter table class add constraint fk_class_studentid foreign key (studentid) references student(id) on update cascade on delete set null;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-2-外键约束注意事项"><a href="#2-6-2-外键约束注意事项" class="headerlink" title="2.6.2 外键约束注意事项"></a>2.6.2 外键约束注意事项</h4><ol>
+<li>从表里的外键通常是主表的主键；</li>
+<li>从表里外键的数据类型必须与主表中主键的数据类型一致；</li>
+<li>主表发生变化时应注意主表与从表的数据一致性问题；</li>
+</ol>
+
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/MySQL/">MySQL</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/01/29/MySQL05-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/"
+                                   title="MySQL05-数据操作之多表查询"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">MySQL05-数据操作之多表查询</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6-DCL"><span class="nav-text">1. 数据控制-DCL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-text">1.1 用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-text">1.2 权限控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BA%A6%E6%9D%9F"><span class="nav-text">2. 约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%97%E7%BA%A7%E7%BA%A6%E6%9D%9F%E5%92%8C%E8%A1%A8%E7%BA%A7%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.1 列级约束和表级约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.1 主键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E%E9%95%BF"><span class="nav-text">2.1.1 主键自增长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%9D%9E%E7%A9%BA%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.2 非空约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.3 唯一约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E9%BB%98%E8%AE%A4%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.4  默认约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%A3%80%E6%9F%A5%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.5 检查约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.6 外键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-%E5%A4%96%E9%94%AE%E5%88%A0%E9%99%A4-%E6%9B%B4%E6%96%B0%E8%A1%8C%E4%B8%BA"><span class="nav-text">2.6.1 外键删除&#x2F;更新行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">2.6.2 外键约束注意事项</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2023</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">luomo</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">20.4k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6-DCL"><span class="nav-text">1. 数据控制-DCL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-text">1.1 用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-text">1.2 权限控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BA%A6%E6%9D%9F"><span class="nav-text">2. 约束</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%97%E7%BA%A7%E7%BA%A6%E6%9D%9F%E5%92%8C%E8%A1%A8%E7%BA%A7%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.1 列级约束和表级约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.1 主键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E%E9%95%BF"><span class="nav-text">2.1.1 主键自增长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%9D%9E%E7%A9%BA%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.2 非空约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.3 唯一约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E9%BB%98%E8%AE%A4%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.4  默认约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%A3%80%E6%9F%A5%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.5 检查约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-text">2.6 外键约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-%E5%A4%96%E9%94%AE%E5%88%A0%E9%99%A4-%E6%9B%B4%E6%96%B0%E8%A1%8C%E4%B8%BA"><span class="nav-text">2.6.1 外键删除&#x2F;更新行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">2.6.2 外键约束注意事项</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/lazyload.min.js"></script>
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+    
+<script src="//cdn.jsdelivr.net/npm/mermaid@10.5.0/dist/mermaid.min.js"></script>
+
+
+
+
+
+
+<!-- pjax -->
+
+
+
+    
+        
+            
+<script class="custom-inject-js" src="/js/luomo.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

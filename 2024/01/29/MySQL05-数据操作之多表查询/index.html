@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="luomo">
+    
+    <title>
+        
+            MySQL05-数据操作之多表查询 |
+        
+        luomo&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/luomo.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#8b6cef","title":"luomo's blog","author":"luomo","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/logo.png"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Changelog":"/changelog"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"人生如逆旅，我亦是行人。","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":false,"hide_header":false},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"CV鼓励师"},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2023,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":["/css/luomo.css"],"js":["/js/luomo.js"]},"root":"","version":"4.0.6"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               luomo&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/changelog"
+                            >更新日志</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/changelog"
+                    >更新日志</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        MySQL05-数据操作之多表查询
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">luomo</span>
+                                
+                                    <span class="author-badge">CV鼓励师</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-01-29 20:41:50</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Mon Jan 29 2024 20:52:27 GMT+0800">2024-01-29 20:52:27</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">MySQL学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>5.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>19 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="1-多表关系"><a href="#1-多表关系" class="headerlink" title="1. 多表关系"></a>1. 多表关系</h2><p>数据库中多表间的关系有一对多&#x2F;多对一、多对多、一对一三类。</p>
+<h3 id="1-1-一对多-多对一"><a href="#1-1-一对多-多对一" class="headerlink" title="1.1  一对多&#x2F;多对一"></a>1.1  一对多&#x2F;多对一</h3><p>一对多&#x2F;多对一的关系指 A 表的一行对应 B 表的多行， B 表的一行只对应 A 表的一行，比如一个班级可以有多个学生，一个学生却只能有一个班级。</p>
+<p><strong>案例：</strong><br>部门与员工、班级与学生、商品分类与商品</p>
+<p><strong>外键实现：</strong><br>在多的一方建立外键，指向一的一方的主键。</p>
+<p><strong>数据特点：</strong></p>
+<ol>
+<li>添加数据时，主表可以随意添加，从表添加数据必须依赖主表，受主表限制；</li>
+<li>删除数据时，如果主表某一行的数据受到从表的依赖，则不能删除，从表数据可以随意删除，如果一定要删除主表数据，应该先删除有关联得从表数据后再删除；</li>
+</ol>
+<h3 id="1-2-多对多"><a href="#1-2-多对多" class="headerlink" title="1.2 多对多"></a>1.2 多对多</h3><p>多对多的关系指 A 表的一行对应 B 表的多行，B 表的一行也对应 A 表的多行，比如一个学生可以选多门课程，一门课程也可以供多个学生选修。</p>
+<p><strong>案例：</strong><br>学生与课程</p>
+<p><strong>外键实现：</strong><br>建立第三张中间表，中间表至少包含两个外键，分别关联两方主键</p>
+<p><strong>数据特点：</strong></p>
+<ol>
+<li><p>添加数据时，先添加两张父表记录，再添加中间表记录；</p>
+</li>
+<li><p>删除数据时，先删除中间表记录，再删除两张父表记录；</p>
+</li>
+</ol>
+<h3 id="1-3-一对一"><a href="#1-3-一对一" class="headerlink" title="1.3 一对一"></a>1.3 一对一</h3><p>一对一的关系指 A 表的一行对应 B 表的一行，反之也成立，多用于单表拆分，即将一张表的基础字段放在一张表中，其他详情字段放在另一张表中，以提升操作效率，具有一对一关系的两张表是可以合并成一张表的。</p>
+<p><strong>案例：</strong><br>用户与用户详情</p>
+<p><strong>外键实现：</strong></p>
+<ol>
+<li>在任意一方加入外键，关联另外一方的主键，并且给外键设置唯一约束；</li>
+<li>共享主键，即让两张表的主键内容一致，两张表共用一个主键（十分不推荐）；</li>
+</ol>
+<h2 id="2-多表查询概述"><a href="#2-多表查询概述" class="headerlink" title="2. 多表查询概述"></a>2. 多表查询概述</h2><p>当直接对多张表进行合并查询时，查询的数据结果将会是这几张表的笛卡尔积，假如 A 表有 3 条数据，B 表有 4 条数据，结果就会有 3 * 4 &#x3D; 12 条数据，也即会展示所有组合结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 合并查询，会展示两张表的笛卡尔积</span><br><span class="line">select * from A表, B表;</span><br></pre></td></tr></table></figure>
+
+<p>在多表查询时，为了获得真正需要的数据，就要消除无效的笛卡尔积，由此就有了以下多表查询方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">多表查询</span><br><span class="line">├─ 连接查询</span><br><span class="line">│	├─ 内连接查询</span><br><span class="line">│	│	├─ 隐式内连接查询</span><br><span class="line">│	│	└─ 显式内连接查询</span><br><span class="line">│	├─ 外连接查询</span><br><span class="line">│	│	├─ 左外连接查询</span><br><span class="line">│	│	└─ 右外连接查询</span><br><span class="line">│	└─ 自连接查询</span><br><span class="line">└─ 子查询</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-内连接查询-DQL"><a href="#3-内连接查询-DQL" class="headerlink" title="3. 内连接查询-DQL"></a>3. 内连接查询-DQL</h2><p>所谓内连接(inner join)，就是在表关系的笛卡尔积(Cartesian product) 数据记录中，保留表关系中所有匹配的数据记录，舍弃不匹配的数据记录，相当于查询两张表的交集部分。根据不同的语法形式，内连接查询分为隐式内连接查询(SQL86标准)和显式内连接查询(SQL92标准)。</p>
+<h3 id="3-1-隐式内连接查询"><a href="#3-1-隐式内连接查询" class="headerlink" title="3.1 隐式内连接查询"></a>3.1 隐式内连接查询</h3><p>隐式内连接，就是使用 where 条件，消除不符合条件的无用数据，也即消除笛卡尔积的无用数据，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表1,表2...</span><br><span class="line">where 连接条件/筛选条件</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 和 score 表中的学生姓名及分数</span><br><span class="line">select stuname,score</span><br><span class="line">from student,score</span><br><span class="line">where student.stuid = score.stuid;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-显式内连接查询"><a href="#3-2-显式内连接查询" class="headerlink" title="3.2 显式内连接查询"></a>3.2 显式内连接查询</h3><p>显式内连接，就是使用 连接关键词 join 显式连接多个表数据，显式的性能比隐式高，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表1 [inner] join 表2 on 连接条件</span><br><span class="line">[inner] join 表3 on 连接条件</span><br><span class="line">[where 筛选条件]</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 和 score 表中的学生姓名及分数</span><br><span class="line">select stuname,score</span><br><span class="line">from student join score on student.stuid = score.stuid;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-内连接注意事项"><a href="#3-3-内连接注意事项" class="headerlink" title="3.3 内连接注意事项"></a>3.3 内连接注意事项</h3><ol>
+<li>隐式内连接中，where 子句后面往往首先是多表之间的连接条件，需要的话也可用 and 运算符将筛选条件与之联合，where 子句之后的筛选条件语法与单表查询语法类似；</li>
+<li>隐式内连接中，where 子句后面可以有 GROUP BY、HAVING、ORDER BY 等子句；</li>
+<li>显式内连接中，<code>[inner] join</code> 的 inner 可以缺省，仅 join 就代表内连接；</li>
+<li>显式内连接中，每个 join 子句之后必须有 on 子句，on 子句用来说明两表之间的内连接关系；</li>
+<li>显式内连接中，where 子句在此仅用于控制数据筛选条件的限定，用法与表单查询类似，后面也可以有 GROUP BY、HAVING、ORDER BY 等子句；</li>
+<li>显式内连接查询比隐式内连接查询应用更广泛；</li>
+<li>内连接条件在很多情况下发生在<strong>有关系的数据表主外键之间</strong>；</li>
+<li>多表查询时，如果关联的两个数据表中存在同名字段，则同名字段前必须加表名限定，其格式为 <code>表名.字段名</code>，此时为了书写方便，往往会给表取一个别名，该别名仅在当前 select 语句内部有效；</li>
+<li>在连接查询中常用 <code>表名.字段名</code> 的形式引用字段，主要是引用同名字段的需要，再多表查询中，对于非同名字段也建议采用这种形式，这将有利于提升查询效率；</li>
+</ol>
+<h2 id="4-外连接查询-DQL"><a href="#4-外连接查询-DQL" class="headerlink" title="4. 外连接查询-DQL"></a>4. 外连接查询-DQL</h2><p>内连接是将满足条件的记录进行连接，不满足条件的记录是被排除在结果集之外的，如果<strong>需要的数据还涉及不满足条件的记录，就需要进行外连接查询</strong>。MySQL目前不支持全外连接查询，但可以用其他方式替代解决，如可通过联合多个查询的方式达到全外连接查询的效果。外连接查询分为左外连接查询和右外连接查询，左外连接指查询左表所有数据，以及两张表交集部分数据，右外连接指查询右表所有数据，以及两张表交集部分数据。</p>
+<h3 id="4-1-左外连接查询"><a href="#4-1-左外连接查询" class="headerlink" title="4.1 左外连接查询"></a>4.1 左外连接查询</h3><p>左外连接时以左表为基本表，左表的内容全部显示，根据连接条件，右表与左表匹配的内容正常连接(中间重合部分)，无法匹配的内容则用空值与左表连接，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 左表 left [inner] join 右表 on 连接条件</span><br><span class="line">[where 筛选条件]</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 和 score 表中的学生姓名及分数</span><br><span class="line">select stuname,score</span><br><span class="line">from student left join score on student.stuid = score.stuid;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-右外连接查询"><a href="#4-2-右外连接查询" class="headerlink" title="4.2 右外连接查询"></a>4.2 右外连接查询</h3><p>右外连接与左连接查询语法相同，只是以右表为基本表，右表的内容全部显示，根据连接条件，左表与右表匹配的内容正常连接(中间重合部分)，无法匹配的内容则用空值与右表连接，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 左表 left [inner] join 右表 on 连接条件</span><br><span class="line">[where 筛选条件]</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 和 score 表中的学生姓名及分数</span><br><span class="line">select stuname,score</span><br><span class="line">from score right join student on student.stuid = score.stuid;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-外连接注意事项"><a href="#4-3-外连接注意事项" class="headerlink" title="4.3 外连接注意事项"></a>4.3 外连接注意事项</h3><ol>
+<li>左外连接和右外连接的<strong>形式和作用基本一样</strong>，唯一区别就是所<strong>关联数据源的顺序不同</strong>，两种类型的外连接查询语句可互换，具体使用哪种形式没有特别要求，根据方便程度决定即可，一般使用左外连接更多一点；</li>
+<li>外连接查询时可以通过 where 子句筛选数据，where 子句后面可以有 GROUP BY、HAVING、ORDER BY 等子句；</li>
+<li>外连接结果集是基本表的全部内容加上左右表的重复内容，也就是说<strong>外连接结果集包含内连接结果集</strong>；</li>
+<li>左右外连接查询时，将左右表的位置互换，并更改 left join 或 right join 为对方，就可实现左右外连接互换；</li>
+</ol>
+<h2 id="5-自连接查询-DQL"><a href="#5-自连接查询-DQL" class="headerlink" title="5. 自连接查询-DQL"></a>5. 自连接查询-DQL</h2><p>连接操作不仅可以在两个数据表之间进行，也可以是一个数据表与自己进行连接，称为表的自连接，也称为自身连接，自连接查询的语法同内连接查询的语法一样，只是<strong>多个数据表都是由同一个物理表形成</strong>的，<strong>自连接查询必须使用表别名</strong>，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 表别名1.字段1, 表别名1.字段2... 表别名2.字段1, 表别名2.字段2...</span><br><span class="line">from 表1 [as] 表别名1 [inner] join 表2 [as] 表别名2 on 连接条件</span><br><span class="line">[where 筛选条件]</span><br><span class="line"></span><br><span class="line"># 例如，查询 score 表中两门课成绩都大于 90 的学生学号及分数</span><br><span class="line">select distinct t1.stuid, t1.score 成绩一, t2.score 成绩二</span><br><span class="line">from score t1 join score t2 on t1.stuid = t2.stuid</span><br><span class="line">where t1.cid != t2.cid and t1.score &gt; 90 and t2.score &gt; 90;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>自连接是一种特殊的内连接，只要给数据表取两个不同的别名，就可以在逻辑上将一个物理表当成两个表来使用；</li>
+<li>在自连接时，所有列都是两表共有的同名列，对列的运用必须使用 <strong>别名.列名</strong> 的形式，否则出现二义性；</li>
+<li><strong>自连接查询既可以是内连接查询，也可以是外连接查询，查询语法也可以随查询目的在内连接和外连接查询中选择</strong>；</li>
+</ol>
+<h2 id="6-联合查询-DQL"><a href="#6-联合查询-DQL" class="headerlink" title="6. 联合查询-DQL"></a>6. 联合查询-DQL</h2><p>联合查询又叫合并查询、连接查询，是用 union 或 union all 语句将两条或两条以上的 select 语句的查询结果集合并，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表1</span><br><span class="line">union / union all</span><br><span class="line">select 字段1,字段2...</span><br><span class="line">from 表2;</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中学生姓名和学号</span><br><span class="line">select stuid</span><br><span class="line">from student</span><br><span class="line">union all</span><br><span class="line">select stuname</span><br><span class="line">from student;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li><strong>UNION ALL</strong> 将两个查询结果合并，对于重复的数据<strong>不做去重</strong>操作；</li>
+<li><strong>UNION</strong> 将两个查询结果合并，对于重复的数据<strong>会做去重</strong>操作；</li>
+<li>被合并的所有查询列数必须保持一致，对应列的数据类型必须兼容；</li>
+<li>联合查询比使用 or 效率高，不会使索引失效；</li>
+</ol>
+<h2 id="7-子查询-DQL"><a href="#7-子查询-DQL" class="headerlink" title="7. 子查询-DQL"></a>7. 子查询-DQL</h2><p>在 SQL 中，一个 select-from-where 查询语句称为一个<strong>查询块</strong>，将一个查询块嵌套在另一个查询块中的查询称为<strong>嵌套查询</strong>，嵌套在查询块中的内层查询称为<strong>子查询</strong>，相应的外层查询称为父查询。SQL 也支持多层嵌套子查询，即一个子查询中还可以嵌套其他子查询。</p>
+<p>根据子查询中查询到的结果集规模的不同，可以将子查询分为单值子查询、列子查询、行子查询和表子查询。</p>
+<p>子查询使用的位置可以在 where(having)、from 和 select，最常用在父查询的 where 子句或 having 子句中，与比较运算符或者逻辑运算符一起构成 where 筛选条件或 having 筛选条件。</p>
+<h3 id="7-1-标量子查询"><a href="#7-1-标量子查询" class="headerlink" title="7.1 标量子查询"></a>7.1 标量子查询</h3><p>当子查询的结果集为单个值（单行单列）时，称之为标量子查询，也叫单值子查询。标量子查询中，父查询常用 <code>=</code>、<code>&lt;=&gt;</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>!=</code>、<code>&lt;&gt;</code>、<code>!&lt;</code>、<code>!&gt;</code> 等比较运算符与子查询进行连接，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1, 字段2 ...</span><br><span class="line">from 表2</span><br><span class="line">where 字段3 比较运算符 (单值子查询);</span><br><span class="line"></span><br><span class="line"># 例如，联合 class 和 teacher 表查询软件1班的班主任的姓名、性别和年龄</span><br><span class="line">select name, sex, age</span><br><span class="line">from teacher</span><br><span class="line">where name = (select teaid from class where classname = &#x27;软件1班&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>标量子查询一般表现为父查询与子查询之间用 <code>=</code>、<code>&lt;=&gt;</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>!=</code>、<code>&lt;&gt;</code>、<code>!&lt;</code>、<code>!&gt;</code> 等比较运算符进行连接，而且通常子查询的位置在关系比较运算符的右侧；</li>
+<li>子查询内容必须用括号 <code>()</code> 包围，否则语法会出错；</li>
+<li>子查询一般都可以通过连接查询实现相同功能；</li>
+</ol>
+<h3 id="7-2-列子查询"><a href="#7-2-列子查询" class="headerlink" title="7.2 列子查询"></a>7.2 列子查询</h3><p>当子查询结果即为一列值（单列多行）时，称为列子查询，列子查询作为外层 select 语句的查询条件，一般通过 <code>in</code>、<code>any</code>、<code>some</code> 和 <code>all</code> 等操作符进行关联，不能用关系比较运算符关联，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select 字段1, 字段2 ...</span><br><span class="line">from 表2</span><br><span class="line">where 字段3 [in any some all] (列子查询);</span><br><span class="line"></span><br><span class="line"># 例如，联合 student 和 score 表查询软件1班全体学生的姓名、学号、课程编号和分数</span><br><span class="line">select stuid, cid, score from score where stuid in (select stuid from student where class = &#x27;软件1班&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>列子查询不能用关系比较运算符与外层查询关联；</li>
+<li>列子查询常用操作符及其含义如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IN</td>
+<td>在子查询返回的指定集合范围内，多选一</td>
+</tr>
+<tr>
+<td>NOT IN</td>
+<td>不在子查询返回的指定集合范围内</td>
+</tr>
+<tr>
+<td>ANY</td>
+<td>子查询返回列表中，满足任意一个值即可</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td>子查询返回列表的所有值都必须满足</td>
+</tr>
+<tr>
+<td>SOME</td>
+<td>与ANY等同，使用SOME的地方都可以使用ANY</td>
+</tr>
+</tbody></table>
+<h3 id="7-3-行子查询"><a href="#7-3-行子查询" class="headerlink" title="7.3 行子查询"></a>7.3 行子查询</h3><p>当子查询结果即为一行值（单行多列）时，称为行子查询，但是这种情况一般很少出现。其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select 字段1, 字段2 ...</span><br><span class="line">from 表2</span><br><span class="line">where (字段3, 字段4) [= / &lt; / &gt; / IN / NOT IN] (行子查询); </span><br><span class="line"></span><br><span class="line"># 例如，在 student 中查询与学号 24030101 同岁同班的同学的姓名和学号</span><br><span class="line">select name, stuid from student</span><br><span class="line">where (age, classid) = (select age, classid from student where stuid = 24030101); </span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>标量子查询一般表现为父查询与子查询之间用 <code>=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>in</code>、<code>not in</code> 等进行连接；</li>
+<li>行子查询中一般将子查询得到的数据作为一个整体进行处理或者与其他行进行比较；</li>
+</ol>
+<h3 id="7-4-表子查询"><a href="#7-4-表子查询" class="headerlink" title="7.4 表子查询"></a>7.4 表子查询</h3><p>若子查询结果即为多行多列，则称为表子查询。在 select 语句中所有能使用数据源的地方都可以插入表子查询，表子查询比较常见的嵌入位置为 where 与 from 子句。其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 格式一：</span><br><span class="line">select 字段1, 字段2 ...</span><br><span class="line">from 表2</span><br><span class="line">where (字段3, 字段4) [in any some all] (表子查询);</span><br><span class="line"># 格式二：</span><br><span class="line">select 字段1, 字段2</span><br><span class="line">from (表子查询) as 表1别名 join 表2 as 表2别名 on 条件表达式;</span><br><span class="line"></span><br><span class="line"># 例一，查询与与学号 24030101、24030102 同岁同班的同学的姓名和学号</span><br><span class="line">select stuname, stuid from student where (age, classid) in</span><br><span class="line">(select age, classid from student where stuid = &#x27;24030101&#x27; or  stuid = &#x27;24030102&#x27;);</span><br><span class="line"># 例二，查询各科目的考试成绩，包括科目名称、最高分、最低分、平均分</span><br><span class="line">select c.cname, s.maxscore, s.minscore, s.avgscore</span><br><span class="line">from (select cid, max(score) as maxscore, min(score) as minscore, avg(score) as avgscore</span><br><span class="line">      from score group by cid) as s</span><br><span class="line">left join course as c on c.cid = s.cid;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>表子查询嵌入外层查询的 where 子句时，通常用 in、any、some 和 all 等集合运算符与外层查询关联；</li>
+<li>表子查询嵌套在外层查询的 from 子句必然要与其他数据表进行连接，为了能在外层查询中引用该虚拟表及其内部各列，必须为虚拟表设置表别名，如果虚拟表内部有统计列或计算列，同样需要设置列别名，否则无法引用；</li>
+</ol>
+<h3 id="7-5-子查询注意事项"><a href="#7-5-子查询注意事项" class="headerlink" title="7.5 子查询注意事项"></a>7.5 子查询注意事项</h3><ol>
+<li>标量子查询、行子查询嵌入外层查询的 where 子句时，通常用关系运算符与外层查询关联，列子查询、表子查询嵌入外层查询的 where 子句时，通常用 in、any、some 和 all 等集合运算符与外层查询关联；</li>
+<li>order by 子句不能用于子查询，只能对最外层的查询结果进行排序；</li>
+<li>设计多层嵌套的子查询时建议与测试顺序一样，从最内层值查询开始，逐步向外层延伸；</li>
+<li>子查询可以嵌套多层，但嵌套级别越多，效率越低，必要时可以通过连接查询来代替多层嵌套查询；</li>
+<li>子查询外部的语句不仅可以是 SELECT 查询语句，还可以是 INSERT &#x2F; UPDATE &#x2F; DELETE &#x2F;  的任何一个</li>
+<li>几乎所有多表查询任务都可以通过嵌套查询或连接查询实现，在实际海量数据应用场景中，应该根据效率优先原则确定查询语句；</li>
+</ol>
+<h3 id="7-6-子查询的相关性与执行顺序"><a href="#7-6-子查询的相关性与执行顺序" class="headerlink" title="7.6 子查询的相关性与执行顺序"></a>7.6 子查询的相关性与执行顺序</h3><p>根据子查询的查询条件是否依赖父查询可以把子查询分为非相关子查询和相关子查询。若子查询不依赖父查询，则这类子查询称为不相关子查询，若依赖父查询，则称为相关子查询，不相关子查询的子查询可以单独执行，相关子查询的子查询不能单独执行。</p>
+<h4 id="7-6-1-非相关子查询"><a href="#7-6-1-非相关子查询" class="headerlink" title="7.6.1 非相关子查询"></a>7.6.1 非相关子查询</h4><p>非相关子查询的子查询不依赖父查询，独立于外部查询，可以单独执行。</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>执行子查询，其结果不被显示，而是传递给外部查询，作为外部查询的条件使用；</li>
+<li>执行外部查询，并显示整个结果；</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 例如，联合 class 和 teacher 表查询软件1班的班主任的姓名、性别和年龄</span><br><span class="line">select name, sex, age</span><br><span class="line">from teacher</span><br><span class="line">where name = (select teaid from class where classname = &#x27;软件1班&#x27;);</span><br><span class="line"></span><br><span class="line"># 1. 首先执行子查询 select teaid from class where classname = &#x27;软件1班&#x27; ；得到软件1班班主任的 id</span><br><span class="line"># 2. 然后将这个 id 传递给外部查询，作为其 where 子句的执行条件</span><br><span class="line"># 3. 根据这个执行条件，找到需要的数据</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-6-2-相关子查询"><a href="#7-6-2-相关子查询" class="headerlink" title="7.6.2 相关子查询"></a>7.6.2 相关子查询</h4><p>相关子查询必须依赖父查询，其子查询不能返回独立的结果集，多数情况下是子查询的 WHERE 子句中引用了外部查询的表。</p>
+<p><strong>执行过程：</strong></p>
+<ol>
+<li>从外层查询中取出一个元组（一行数据），将元组相关列的值传给内层查询；</li>
+<li>执行内层查询，得到子查询操作的值；</li>
+<li>外查询根据子查询返回的结果或结果集得到满足条件的行；</li>
+<li>然后外层查询取出下一个元组重复步骤 1-3，直到外层的元组全部处理完毕；</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 查询 score 表中分数高于该课程平均分的学生学号和成绩</span><br><span class="line">select stuid, score from score as a</span><br><span class="line">where score &gt; (select avg(score) from score as b where a.cid = b.cid);</span><br><span class="line"></span><br><span class="line"># 1. 假设 score 表中的第一条记录的 cid 的值为 2401，将其代入子查询中，使 a.cid 值为 2401</span><br><span class="line"># 2. 由此子查询变为 select avg(score) from score as b where &#x27;2401&#x27; = b.cid</span><br><span class="line"># 3. 执行上一步得到的子查询，结果为课程编号为 2401 的课程的平均分</span><br><span class="line"># 4. 将该子查询值代回外部查询，变为 select stuid, score from score as a where score &gt; &#x27;2401课程平均分&#x27;</span><br><span class="line"># 5. 如果外部查询结果成立，则留下该次查询结果，否则舍弃，重复该过程，最后得到最终的结果集</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-交叉连接查询-DQL"><a href="#8-交叉连接查询-DQL" class="headerlink" title="8. 交叉连接查询-DQL"></a>8. 交叉连接查询-DQL</h2><p>交叉连接是没有任何限制条件的连接，也称为笛卡尔连接，因为其产生的结果集与笛卡尔积范围一样，将<strong>产生两个数据源能连接的最大结果集</strong>，除了包含内连接，外连接的所有数据外，还有大量没有意义的数据，所以<strong>交叉连接几乎没有实际应用价值</strong>，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表1 cross [inner] join 表2;</span><br><span class="line"></span><br><span class="line"># 例如，将 score 和 student 表交叉连接后展示所有数据</span><br><span class="line">select *</span><br><span class="line">from score cross join student;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>交叉连接查询中，join 关键字后面没有 on 子句，也就是不设连接条件；</li>
+<li>交叉连接查询中，最大字段数（列数）&#x3D; 左表字段数 + 右表字段数，最大记录数（行数）&#x3D; 左表记录数 * 右表记录数；</li>
+<li>交叉连接查询是从左表依次取出每一条记录，与右表中的全部记录逐个、无条件地连接，因此产生出两个数据表连接的最大结果集；</li>
+</ol>
+
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/MySQL/">MySQL</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/01/29/MySQL06-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6&%E7%BA%A6%E6%9D%9F/"
+                                   title="MySQL06-数据控制&amp;约束"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">MySQL06-数据控制&amp;约束</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/01/29/MySQL04-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2&%E5%88%AB%E5%90%8D/"
+                                   title="MySQL04-数据操作之单表查询&amp;别名"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">MySQL04-数据操作之单表查询&amp;别名</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A4%9A%E8%A1%A8%E5%85%B3%E7%B3%BB"><span class="nav-text">1. 多表关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%80%E5%AF%B9%E5%A4%9A-%E5%A4%9A%E5%AF%B9%E4%B8%80"><span class="nav-text">1.1  一对多&#x2F;多对一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-text">1.2 多对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-text">1.3 一对一</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%A6%82%E8%BF%B0"><span class="nav-text">2. 多表查询概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">3. 内连接查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E9%9A%90%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.1 隐式内连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%98%BE%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.2 显式内连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%86%85%E8%BF%9E%E6%8E%A5%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.3 内连接注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">4. 外连接查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.1 左外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.2 右外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">4.3 外连接注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%87%AA%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">5. 自连接查询-DQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">6. 联合查询-DQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%AD%90%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">7. 子查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%A0%87%E9%87%8F%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.1 标量子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E5%88%97%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.2 列子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.3 行子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-%E8%A1%A8%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.4 表子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-%E5%AD%90%E6%9F%A5%E8%AF%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">7.5 子查询注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">7.6 子查询的相关性与执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-1-%E9%9D%9E%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.6.1 非相关子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-2-%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.6.2 相关子查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">8. 交叉连接查询-DQL</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2023</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">luomo</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">20.4k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A4%9A%E8%A1%A8%E5%85%B3%E7%B3%BB"><span class="nav-text">1. 多表关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%80%E5%AF%B9%E5%A4%9A-%E5%A4%9A%E5%AF%B9%E4%B8%80"><span class="nav-text">1.1  一对多&#x2F;多对一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-text">1.2 多对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-text">1.3 一对一</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%A6%82%E8%BF%B0"><span class="nav-text">2. 多表查询概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">3. 内连接查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E9%9A%90%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.1 隐式内连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%98%BE%E5%BC%8F%E5%86%85%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.2 显式内连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%86%85%E8%BF%9E%E6%8E%A5%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.3 内连接注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">4. 外连接查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.1 左外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.2 右外连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%A4%96%E8%BF%9E%E6%8E%A5%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">4.3 外连接注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%87%AA%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">5. 自连接查询-DQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">6. 联合查询-DQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%AD%90%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">7. 子查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%A0%87%E9%87%8F%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.1 标量子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E5%88%97%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.2 列子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.3 行子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-%E8%A1%A8%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.4 表子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-%E5%AD%90%E6%9F%A5%E8%AF%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">7.5 子查询注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">7.6 子查询的相关性与执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-1-%E9%9D%9E%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.6.1 非相关子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-6-2-%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">7.6.2 相关子查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">8. 交叉连接查询-DQL</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/lazyload.min.js"></script>
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+    
+<script src="//cdn.jsdelivr.net/npm/mermaid@10.5.0/dist/mermaid.min.js"></script>
+
+
+
+
+
+
+<!-- pjax -->
+
+
+
+    
+        
+            
+<script class="custom-inject-js" src="/js/luomo.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>

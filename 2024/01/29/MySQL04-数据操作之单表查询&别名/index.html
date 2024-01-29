@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="luomo">
+    
+    <title>
+        
+            MySQL04-数据操作之单表查询&amp;别名 |
+        
+        luomo&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/font/css/brands.min.css">
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/luomo.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#8b6cef","title":"luomo's blog","author":"luomo","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/logo.png"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Changelog":"/changelog"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"人生如逆旅，我亦是行人。","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":false,"hide_header":false},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":"CV鼓励师"},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":false,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2023,"word_count":true,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":["/css/luomo.css"],"js":["/js/luomo.js"]},"root":"","version":"4.0.6"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               luomo&#39;s blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/changelog"
+                            >更新日志</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/changelog"
+                    >更新日志</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        MySQL04-数据操作之单表查询&amp;别名
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">luomo</span>
+                                
+                                    <span class="author-badge">CV鼓励师</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-01-29 20:40:07</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Mon Jan 29 2024 20:52:21 GMT+0800">2024-01-29 20:52:21</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">MySQL学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>5.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>19 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="1-别名"><a href="#1-别名" class="headerlink" title="1. 别名"></a>1. 别名</h2><p>别名就是一个字符串标识，使用别名可以让数据展示更加直观。</p>
+<h3 id="1-1-表的别名"><a href="#1-1-表的别名" class="headerlink" title="1.1 表的别名"></a>1.1 表的别名</h3><p>在查询操作，特别是多表查询操作时，假若表名很长使用起来就不太方便，此时可为表取一个別名，用该别名来代替表的名称。其语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">表名 [as] 表的别名 </span><br><span class="line"># 其中，as 可以省略，如：</span><br><span class="line">表名 表的别名</span><br><span class="line"></span><br><span class="line"># 例如，将 student 改为 stu 查询整表</span><br><span class="line">select * from student as stu;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-字段的别名"><a href="#1-2-字段的别名" class="headerlink" title="1.2 字段的别名"></a>1.2 字段的别名</h3><p>为字段取别名的语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">字段名 [as] 字段的别名</span><br><span class="line"># 或</span><br><span class="line">字段名 字段的别名</span><br><span class="line"></span><br><span class="line"># 例如，将 student 中的 name 取别名为“姓名”，age 取别名为 “年龄”，查询整表</span><br><span class="line">select name as &#x27;姓名&#x27;,age as &#x27;年龄&#x27;</span><br><span class="line">from student;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>别名字符串一般可以不加引号，但如果别名内有空格，则必须用单引号或双引号引起来；</li>
+<li><strong>字段名与别名之间也可以不用 <code>as</code> ，而直接用空格连接</strong>，如：<code>select name 姓名,age 年龄 from student;</code> ；</li>
+<li>在 select 语句执行中，where 子句执行顺序在前，列别名生效在后，因此在 where 子句中不能用别名来判断，必须用列的原名判断，否则运行会报错；</li>
+</ol>
+<h2 id="2-简单查询-DQL"><a href="#2-简单查询-DQL" class="headerlink" title="2. 简单查询-DQL"></a>2. 简单查询-DQL</h2><p>select 语句用于从表中选取数据，并将结果存储在结果表中，这个结果表也常常称为结果集。</p>
+<h3 id="2-1-单字段-多字段查询"><a href="#2-1-单字段-多字段查询" class="headerlink" title="2.1 单字段&#x2F;多字段查询"></a>2.1 单字段&#x2F;多字段查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2,字段3...</span><br><span class="line">from 表名;</span><br><span class="line"></span><br><span class="line"># 示例，从 student 表中查询 name、age 字段</span><br><span class="line">select name,age</span><br><span class="line">from student;</span><br><span class="line"></span><br><span class="line"># 示例，用通配符 * 从 student 表中查询所有字段</span><br><span class="line">select * from 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong></p>
+<ol>
+<li>如果查询的是表中的所有字段，可以使用通配符 <code>*</code> 代替字段名，查询语句可以写成：<code>select * from 表名;</code>，表示查询该表的所有字段内容，即按照创建表时的顺序排列展示所有字段，在实际应用中不建议使用 <code>select *</code> 语句，这会<strong>降低数据查询效率</strong>；</li>
+</ol>
+<h3 id="2-2-去除重复记录查询"><a href="#2-2-去除重复记录查询" class="headerlink" title="2.2 去除重复记录查询"></a>2.2 去除重复记录查询</h3><p>去除重复记录查询即将查询结果中的重复值合并，通常用于只需知道整体分布情况，不需精确到个人的情况下，比如查询学生家庭住址分布情况、学生年龄分布情况等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select distinct 字段1,字段2,字段3...</span><br><span class="line">from 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>在 select 中除了书写列名，还可以书写字符串，这样书写可以用于标记，如查询日期标记字段： <code>select stuid, stuname,&#39;2023-03-20&#39; from student;</code>，可以<strong>在查询结果中</strong> stuid 和 stuname 字段后加一个 2023-03-20 字段，用于标记日期。</li>
+</ol>
+<h2 id="3-条件查询-DQL"><a href="#3-条件查询-DQL" class="headerlink" title="3. 条件查询-DQL"></a>3. 条件查询-DQL</h2><p>在简单查询的基础上加上 where 子句，即可实现条件查询，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 字段名1,字段名2... </span><br><span class="line">from 表名 </span><br><span class="line">[where 条件表达式];</span><br></pre></td></tr></table></figure>
+
+<p>根据 where 子句的条件表达式不同，条件查询又可分为以下几种不同的类型</p>
+<h3 id="3-1-关系运算符查询"><a href="#3-1-关系运算符查询" class="headerlink" title="3.1 关系运算符查询"></a>3.1 关系运算符查询</h3><p>使用关系运算符构成 where 子句的条件表达式，可完成一类条件查询，MySQL中常用的关系运算符有：</p>
+<table>
+<thead>
+<tr>
+<th>关系运算符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code> 或 <code>&lt;=&gt;</code></td>
+<td>等于</td>
+</tr>
+<tr>
+<td><code>&lt;&gt;</code> 或 <code>!=</code></td>
+<td>不等于</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>小于</td>
+</tr>
+<tr>
+<td><code>!&lt;</code></td>
+<td>不小于</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>大于</td>
+</tr>
+<tr>
+<td><code>!&gt;</code></td>
+<td>不大于</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>大于等于</td>
+</tr>
+</tbody></table>
+<p>例如，查询 student 表中年龄等于或大于17的学生的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where age &gt;= 17;</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ol>
+<li><code>=</code> 和 <code>&lt;=&gt;</code> 几乎完全相同，区别在于 <code>&lt;=&gt;</code> 可以用来对 NULL 进行判断，被比较的两者都为 NULL 时，返回值为 1，即逻辑真；</li>
+<li><code>&lt;&gt;</code> 和 <code>!=</code> 是完全等价的，都是进行不等于判断；</li>
+</ol>
+<h3 id="3-2-between-and-关键字查询"><a href="#3-2-between-and-关键字查询" class="headerlink" title="3.2 between and 关键字查询"></a>3.2 between and 关键字查询</h3><p><code>between and</code> 关键字用于判断某个字段的值是否在指定的范围之内，是SQL中专门关于闭区间判断的运算符，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 字段名 between 值1 and 值2;</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中字段 score 在 60 - 85 之间的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where score between 60 and 85;</span><br><span class="line"></span><br><span class="line"># 同时，between and 关键字 也可用关系运算符表示，即上述示例可表示为</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where score &gt;= 60 and score &lt;= 85;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>between 之后跟的是范围的最小值，and 之后跟的是范围的最大值，两者顺序不能颠倒；</li>
+<li><code>not between and</code> 是 between and 运算的反运算，其格式为在 between and 运算前直接加 not，如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查询 student 表中字段 score 在 60 - 85 以外的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where score not between 60 and 85;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-like-关键字和通配符查询"><a href="#3-3-like-关键字和通配符查询" class="headerlink" title="3.3 like 关键字和通配符查询"></a>3.3 like 关键字和通配符查询</h3><p><code>like</code> 关键字用于判断两个字符串是否相匹配，可直接匹配字符串，也可配合通配符 <code>%</code> 或 <code>_</code> 进行模糊查询，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 字段名 like 通配符表示的值;</span><br><span class="line"></span><br><span class="line"># like 直接匹配字符串查询，查询 student 表中字段 name 为 陈 的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where name like &#x27;陈&#x27;;</span><br><span class="line"></span><br><span class="line"># like 配合通配符进行模糊查询，查询 student 表中字段 name 姓为 陈 的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where name like &#x27;陈%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li><code>not like</code> 是 like 运算的反运算，其格式为在 like 运算前直接加 not，如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查询 student 表中字段 name 姓不为 陈 的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where name not like &#x27;陈%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>通配符的转义</strong></p>
+<p>转义即表示转义字符原来的语义，一个转义字符的目的是开始一个字符序列，使得转义字符开头的该字符序列具有不同于该字符序列单独出现时的语义。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from 表名</span><br><span class="line">where 条件表达式</span><br><span class="line">escape &#x27;/&#x27;;</span><br><span class="line"></span><br><span class="line"># 示例，查询名字里带有_的人</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where name like &#x27;/_%&#x27;</span><br><span class="line">escape &#x27;/&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>如上所述，原先 <code>_</code> 在MySQL中表示通配符，表示匹配一个字符，当要查询包含 <code>_</code> 的字段时，就需要用 <code>/</code> 对 <code>_</code> 进行转义，取消它的通配符资格，也即 <code>/_</code> 等同于字符 <code>_</code> ；escape 关键字的主要作用就是指定任意一个字符替代 <code>/</code> 的作用。</p>
+<h3 id="3-4-and-关键字查询"><a href="#3-4-and-关键字查询" class="headerlink" title="3.4 and 关键字查询"></a>3.4 and 关键字查询</h3><p><code>and</code> 关键字，也即逻辑与，表示并且，用来关联两个或两个以上的条件，用 and 连接的条件需同时成立，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 条件表达式1 and 条件表达式2;</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中 age 大于 15 且 sex 为 男 的学生信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where age &gt; 15 and sex = &#x27;男&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>因为 and 关键字表示并且，在同一记录（同一行）中，不存在一个字段是 A 并且同时是 B 的情况（比如字段 sex，不能既是男又是女），所以用 and 关键字连接的条件<strong>字段名应不相同</strong>，就像上面例子中的字段 age 和 sex，一定得是两个不同的字段名，如果一个查询的两个条件是属于同一字段的，那就不应该是逻辑与，而是逻辑或，即应该使用 or 关键字查询，这也是判断使用 and 或 or 关键字的方法；</li>
+<li>and 关键字也可用符号 <code>&amp;&amp;</code> 表示，比如上面的例子可以写成 <code>select * from student where age &gt; 15 &amp;&amp; sex = &#39;男&#39;;</code>，但是并不常用，日常使用写作 and 为好。</li>
+</ol>
+<h3 id="3-5-or-关键字查询"><a href="#3-5-or-关键字查询" class="headerlink" title="3.5 or 关键字查询"></a>3.5 or 关键字查询</h3><p><code>or</code> 关键字，也即逻辑或，表示或者，用来<strong>关联两个或两个以上的条件</strong>，用 or 连接的条件只要<strong>满足其中任意一个</strong>即可，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 条件表达式1 or 条件表达式2;</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中字段 addr 为新疆或西藏的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where addr = 新疆 or addr = 西藏;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>AND(与) 和 OR(或) 运算是有优先级的，<strong>AND 的优先级要高于 OR</strong>；</li>
+<li>在同时有 AND 和 OR 的运算中，要使 OR 运算优先运行，可以用小括号 <code>()</code> 把 OR 连接的条件括起来，小括号的优先级是最高的；</li>
+<li>or 关键字也可用符号 <code>||</code> 表示，比如上面的例子可以写成 <code>select * from student where addr = 新疆 || addr = 西藏;</code>，但是并不常用，日常使用写作 or 为好。</li>
+</ol>
+<h3 id="3-6-in-关键字查询"><a href="#3-6-in-关键字查询" class="headerlink" title="3.6 in 关键字查询"></a>3.6 in 关键字查询</h3><p><code>in</code> 关键字用于判断某个字段的值<strong>是否在指定集合中</strong>（<strong>两个或两个</strong>以上同一字段的条件时），其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 字段名 in (值1,值2...);</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中字段 addr 为新疆、西藏的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where addr in (&#x27;新疆&#x27;,&#x27;西藏&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>in 关键字和 and 关键字大体上是一样的，不同在于，当多个条件所在的字段不同时，只能用 and 关键字，当多个条件所在的字段相同时，使用 in 关键字写法更简洁；</li>
+<li><code>not in</code> 为不包含运算，是 in 运算的反运算，其格式为在 in 运算前直接加 not，如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查询 student 表中字段 addr 为新疆、西藏之外的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where addr not in (&#x27;新疆&#x27;,&#x27;西藏&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-7-null-值查询"><a href="#3-7-null-值查询" class="headerlink" title="3.7 null 值查询"></a>3.7 null 值查询</h3><p>在MySQL中，使用 IS NULL 关键字来判断字段的值是否为空值 NULL，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">where 字段名 is null;</span><br><span class="line"></span><br><span class="line"># 例如，查询 student 表中字段 score 为 null 的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where score is null;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>NULL 值是数据库中一个非常特殊的值，叫空值，它不是数值中的 0，也不是字符中的空格或空字符串，NULL 是 a missing unknownvalue，即不存在、不确定的意思；</li>
+<li>要判断 NULL 值，必须有专门的比较运算符或函数，IS NULL 就是用于判断空值 NULL 是函数；</li>
+<li>因为 is null 是一种函数，所以 <code>字段名 is null</code> 等同于 <code>is null (字段名)</code> ，两者效果一样；</li>
+<li>IS NULL 专门用来判断空值，不能用 <code>= null</code> 表示，而是等同于 <code>&lt;=&gt; null</code> ，仅能用 <code>&lt;=&gt;</code> 判断NULL，这也是 <code>=</code> 和 <code>&lt;=&gt;</code> 的区别；</li>
+<li><code>is not null</code> 是 is null 运算的反运算，其格式为在 is null 运算间直接加 not，如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查询 student 表中字段 score 不为 null 的学生的信息</span><br><span class="line">select *</span><br><span class="line">from student</span><br><span class="line">where score is not null;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-统计查询-DQL"><a href="#4-统计查询-DQL" class="headerlink" title="4. 统计查询-DQL"></a>4. 统计查询-DQL</h2><h3 id="4-1-聚合函数查询"><a href="#4-1-聚合函数查询" class="headerlink" title="4.1 聚合函数查询"></a>4.1 聚合函数查询</h3><p><strong>聚合统计函数也叫组函数、聚簇函数</strong>，与数学函数、字符串函数等不同，聚合函数<strong>只作用于表中的某一字段（某一列）</strong>，在默认情况下，聚合函数会把当前表中的数据当做一个组进行统计，聚合函数有以下几种类型：</p>
+<p><code>count()</code>：计数函数，统计表的行数或某个列下值的个数。<br><code>max()</code>：最大值函数，求某列值中的最大值。<br><code>min()</code>：最小值函数，求某列值中的最小值。<br><code>sum()</code>：求和函数，对表的某列进行求和操作，显然这个列只能是数值类型列，否则报错。<br><code>avg()</code>：平均值函数，对表的某列进行求平均值操作，显然这个列也只能是数值类型列，否则报错。</p>
+<p>聚合函数的使用语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select 聚合函数(字段1,字段2,字段3...) from 表名;</span><br><span class="line"></span><br><span class="line"># 使用 count() 函数统计 student 表中学生人数</span><br><span class="line">select count(*) from student;</span><br><span class="line"># 使用 max() 函数查询 student 表中最大年龄</span><br><span class="line">select max(stuage) from student;</span><br><span class="line"># 使用 min() 函数查询 student 表中最小年龄</span><br><span class="line">select min(stuage) from student;</span><br><span class="line"># 使用 sum() 函数查询 student 表中年龄和</span><br><span class="line">select sum(stuage) from student;</span><br><span class="line"># 使用 avg() 函数查询 student 表中年龄平均值</span><br><span class="line">select avg(stuage) from student;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>聚合函数具有自动滤空的功能，若字段中某一个值为NULL，那么会自动将其过滤使其不参与运算；</li>
+<li>使用 count() 函数统计时，如果统计的字段<strong>没有空值</strong>，则可以写为 <code>count(任一字段名)</code> 或 <code>count(*)</code>，两种写法效果一样；</li>
+</ol>
+<h3 id="4-2-group-by-分组查询"><a href="#4-2-group-by-分组查询" class="headerlink" title="4.2 group by 分组查询"></a>4.2 group by 分组查询</h3><p>group by 子句会先将表中的数据进行分组，再进行查询等操作，可理解为将原来的表拆分成了几张小表，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">group by 字段3,字段4...</span><br><span class="line"></span><br><span class="line"># 例如，统计 student 表中男女生年龄平均值</span><br><span class="line">select stusex 性别, avg(stuage) 平均年龄</span><br><span class="line">from student</span><br><span class="line">group by stusex;</span><br><span class="line"># 即以 stusex 为分组依据，查询 student 表中 stusex 和 avg(stuage) 两个字段</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>group by 子句后可跟多个字段，即多级分组，在多级分组时，一级分组内有重复数据，二级分组才会有意义，以此类推，同时多个字段的顺序直接控制了数据源中数据的分组方式，即从前往后依次为一级、二级、三级……分组，这类似于 Excel 中的多级排序；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 例如，统计 student 表中各地男女生人数</span><br><span class="line">select addr 地址, stusex 性别, count(stuid) 人数</span><br><span class="line">from student</span><br><span class="line">group by addr,stusex;</span><br><span class="line"># 这里先以学生住址分组，同时，在同一住址中都有男女生，再在住址分组的基础上以男女生分组</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在具体应用中，group by 子句常与聚合函数一起使用；</li>
+<li>在分组查询中，查询的字段（select 后跟着的字段）一般为聚合函数和分组字段，查询其他字段是没有意义的；</li>
+<li>一般在 select 语句中加入 group by 子句的分组依据列，以提高查询结果集的可读性；</li>
+</ol>
+<h3 id="4-3-having-统计限制"><a href="#4-3-having-统计限制" class="headerlink" title="4.3 having 统计限制"></a>4.3 having 统计限制</h3><p>having 子句以来实现对分组统计的条件限制，与 where 子句的条件限制功能有些相似，但 having 子句是对 group by 分组后的结果进行过滤，只能出现在 group by 子句之后，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">group by 字段3,字段4...</span><br><span class="line">having 条件表达式</span><br><span class="line"></span><br><span class="line"># 例如，统计 score 表中平均分高于 80 的学生的学号和平均分</span><br><span class="line">select stuid 学号,avg(score) 平均分</span><br><span class="line">from score</span><br><span class="line">group by stuid</span><br><span class="line">having 平均分 &gt; 80;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li><strong>select 语句的各子句的相对位置不能前后颠倒</strong>，group by 子句只能在 where 子句后面，having 子句只能在 group by 子句后面；</li>
+<li>在查询中，SQL的执行顺序为 FROM -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; SELECT；</li>
+</ol>
+<p><strong>where 子句和 having 子句的区别：</strong></p>
+<ol>
+<li>使用位置不同，where 子句通常出现在 select 语句的最后面，having 子句通常出现在 group by 子句之后；</li>
+<li>执行时机不同，where 子句<strong>在 group by 子句之前对数据进行筛选</strong>，having 子句<strong>对 group by 子句之后得到的数据进行过滤</strong>；</li>
+<li>判断条件不同，where 子句的条件中不能包含聚合函数，having 子句中不能使用除了分组字段（即 group by 子句后跟着的字段）和聚合函数之外的其他字段；</li>
+<li>过滤对象不同，where 子句用于过滤从数据表中检索的行，它可以用于过滤行的任何条件，如等于、小于、大于等，而 having 子句用于过滤聚合函数的结果，如 SUM、AVG、COUNT 等，它通常用于过滤分组后的结果。</li>
+<li>对性能的影响不同，where 子句在过滤数据时，可以减少查询的数据量，从而提高查询的效率。而 having 子句则是在过滤分组后的结果时进行过滤，如果使用不当，可能会对查询的性能造成负面影响。从性能的角度来说，having 子句中如果使用了分组字段作为过滤条件，应该替换成 where 子句；因为 where 子句可以在执行分组操作和计算聚合函数之前过滤掉不需要的数据，性能会更好；</li>
+</ol>
+<h2 id="5-排序查询-DQL"><a href="#5-排序查询-DQL" class="headerlink" title="5. 排序查询-DQL"></a>5. 排序查询-DQL</h2><p>通过 select 语句查询的默认查询结果集中，数据是按照数据记录的物理顺序来显示的，当默认的查询结果顺序无法满足需求时，可通过添加 order by 子句来控制查询结果的顺序。</p>
+<h3 id="5-1-order-by-排序查询"><a href="#5-1-order-by-排序查询" class="headerlink" title="5.1 order by 排序查询"></a>5.1 order by 排序查询</h3><p>order by 子句用来对查询结果集进行排序，排序依据即其后指定的字段，排序方式由 asc 或 desc 控制，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">order by 字段3,字段4...</span><br><span class="line"></span><br><span class="line"># 例如，查询 score 表中的学号及分数，并按分数高低降序排列</span><br><span class="line">select stuid,score</span><br><span class="line">from score</span><br><span class="line">order by score desc;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>order by 子句中，asc 为升序（数值从小到大），desc 为降序（数值从大到小），排序方式在缺省状态下默认为升序 asc；</li>
+<li>若 order by 子句后跟着多个字段，即指定了多个排序依据，产生多级排序，从前往后依次为一级、二级、三级……排序，同时，各个排序依据还能指定不同的排序方式，如 <code>order by score desc,stuid asc</code>，但要注意，在多级排序时，一级排序内有重复数据，二级排序才会有意义，以此类推；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 例如，查询 score 表中的学号及分数，并按分数高低降序排列，如果分数相同，则按学号升序排序</span><br><span class="line">select stuid, score</span><br><span class="line">from score</span><br><span class="line">order by score desc, stuid asc;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>order by 子句后指定的排序依据除了能是字段名，还能是查询后的字段顺序值（即 select 语句后跟着的字段顺序，值为1,2,3…），如上述例子还可写为 <code>select stuid,score from score order by 2 desc;</code> ；</li>
+<li>若排序字段为空值，则该值为最小值，即在降序排序中空值显示在最后，在升序排序中显示在最前；</li>
+<li>当  order by 子句后的字段值为数字或字母时，即按照数字或字母的顺序进行排序，当字段值为中文汉字时，会根据对应字符的ASCII码排序，而不是汉字的首字母顺序，因此排序结果往往都是错误的，这时需要借助相应的函数才能实现想要的效果；</li>
+</ol>
+<h3 id="5-2-limit-分页查询"><a href="#5-2-limit-分页查询" class="headerlink" title="5.2 limit 分页查询"></a>5.2 limit 分页查询</h3><p>limit 子句常常应用于分页系统，控制在某一页中显示的数据记录数量，通常与 order by 子句一起使用，其基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select 字段1,字段2...</span><br><span class="line">from 表名</span><br><span class="line">limit 起始索引, 查询记录数;</span><br><span class="line"></span><br><span class="line"># 例如，查询 score 表中的学号及分数，每页显示十名，查询第二页的数据</span><br><span class="line">select stuid,score</span><br><span class="line">from score</span><br><span class="line">limit 1,10;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>起始索引即查询的起始数据的索引，起始索引从 0 开始，查询记录数即查询结果显示的行数，如 <code>limit 10,5</code> ，即表示从数据表的第 11 行开始，一共查询显示 5 行，利用这个特性可以实现分页查询效果，<strong>分页的起始索引 &#x3D; ( 查询页码 - 1 ) * 每页显示记录数</strong>，如，一页显示 10 行，要查询第 3 页的数据，起始索引应为 (3-1)*10&#x3D;20，SQL语句写为 <code>limit 20,10</code>；</li>
+<li>当查询第一页数据，即起始行 a 为 0 时，起始索引可以省略，如查询第 1 页，显示 6 行，可以简写为 limit 6；</li>
+<li>当 <code>limit a</code> 中查询结果记录总数不足 a 行，则按实际结果集记录数量显示；</li>
+<li>分页查询的语句不同数据库各有不同，limit 仅是 MySQL 中的分页查询语句；</li>
+<li>当 limit 子句 和 offset 子句一起出现时，limit 子句决定显示行数，offset 子句决定显示起始点，如 <code>limit 3 offset 6</code> 表示从第 7 行开始，显示 3 行；</li>
+</ol>
+<h2 id="6-基础查询的编写和运行顺序"><a href="#6-基础查询的编写和运行顺序" class="headerlink" title="6. 基础查询的编写和运行顺序"></a>6. 基础查询的编写和运行顺序</h2><p>基础查询的编写顺序和运行顺序是不同的，具体内容如下。</p>
+<h3 id="6-1-基础查询的编写顺序"><a href="#6-1-基础查询的编写顺序" class="headerlink" title="6.1 基础查询的编写顺序"></a>6.1 基础查询的编写顺序</h3><p>基础查询的编写顺序为 select -&gt; from -&gt; where -&gt; group by -&gt; having -&gt; order by -&gt; limit</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 例如，查询score表中分数大于60，平均分大于80的学生的学号和平均分，以学号分组，按平均分倒序排列，从第四个开始显示，只显示五行</span><br><span class="line">select stuid 学号,avg(score) 平均分</span><br><span class="line">from score</span><br><span class="line">where score &gt; 60</span><br><span class="line">group by stuid</span><br><span class="line">having 平均分 &gt; 80</span><br><span class="line">order by 平均分 desc</span><br><span class="line">limit 3,5;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-基础查询的运行顺序"><a href="#6-2-基础查询的运行顺序" class="headerlink" title="6.2 基础查询的运行顺序"></a>6.2 基础查询的运行顺序</h3><p>基础查询的编写顺序如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from 数据表列表</span><br><span class="line">where 条件列表</span><br><span class="line">group by 分组字段列表</span><br><span class="line">having 分组后条件列表</span><br><span class="line">select 查询字段列表</span><br><span class="line">order by 排序字段列表</span><br><span class="line">limit 分页参数</span><br></pre></td></tr></table></figure>
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/MySQL/">MySQL</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/01/29/MySQL05-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/"
+                                   title="MySQL05-数据操作之多表查询"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">MySQL05-数据操作之多表查询</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/01/29/MySQL03-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9/"
+                                   title="MySQL03-数据操作之增删改"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">MySQL03-数据操作之增删改</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%AB%E5%90%8D"><span class="nav-text">1. 别名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%A1%A8%E7%9A%84%E5%88%AB%E5%90%8D"><span class="nav-text">1.1 表的别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AD%97%E6%AE%B5%E7%9A%84%E5%88%AB%E5%90%8D"><span class="nav-text">1.2 字段的别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">2. 简单查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8D%95%E5%AD%97%E6%AE%B5-%E5%A4%9A%E5%AD%97%E6%AE%B5%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.1 单字段&#x2F;多字段查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%AE%B0%E5%BD%95%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.2 去除重复记录查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">3. 条件查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.1 关系运算符查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-between-and-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.2 between and 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-like-%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.3 like 关键字和通配符查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-and-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.4 and 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-or-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.5 or 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-in-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.6 in 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-null-%E5%80%BC%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.7 null 值查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">4. 统计查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.1 聚合函数查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-group-by-%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.2 group by 分组查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-having-%E7%BB%9F%E8%AE%A1%E9%99%90%E5%88%B6"><span class="nav-text">4.3 having 统计限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">5. 排序查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-order-by-%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.1 order by 排序查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-limit-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.2 limit 分页查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BC%96%E5%86%99%E5%92%8C%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">6. 基础查询的编写和运行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BC%96%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-text">6.1 基础查询的编写顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">6.2 基础查询的运行顺序</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2023</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">luomo</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+                <span class="count-box border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">20.4k</span>
+                </span>
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%AB%E5%90%8D"><span class="nav-text">1. 别名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%A1%A8%E7%9A%84%E5%88%AB%E5%90%8D"><span class="nav-text">1.1 表的别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AD%97%E6%AE%B5%E7%9A%84%E5%88%AB%E5%90%8D"><span class="nav-text">1.2 字段的别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">2. 简单查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8D%95%E5%AD%97%E6%AE%B5-%E5%A4%9A%E5%AD%97%E6%AE%B5%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.1 单字段&#x2F;多字段查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%AE%B0%E5%BD%95%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.2 去除重复记录查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">3. 条件查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.1 关系运算符查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-between-and-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.2 between and 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-like-%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.3 like 关键字和通配符查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-and-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.4 and 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-or-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.5 or 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-in-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.6 in 关键字查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-null-%E5%80%BC%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.7 null 值查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">4. 统计查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.1 聚合函数查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-group-by-%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.2 group by 分组查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-having-%E7%BB%9F%E8%AE%A1%E9%99%90%E5%88%B6"><span class="nav-text">4.3 having 统计限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2-DQL"><span class="nav-text">5. 排序查询-DQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-order-by-%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.1 order by 排序查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-limit-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.2 limit 分页查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BC%96%E5%86%99%E5%92%8C%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">6. 基础查询的编写和运行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BC%96%E5%86%99%E9%A1%BA%E5%BA%8F"><span class="nav-text">6.1 基础查询的编写顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">6.2 基础查询的运行顺序</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/lazyload.min.js"></script>
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.0.6/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+    
+<script src="//cdn.jsdelivr.net/npm/mermaid@10.5.0/dist/mermaid.min.js"></script>
+
+
+
+
+
+
+<!-- pjax -->
+
+
+
+    
+        
+            
+<script class="custom-inject-js" src="/js/luomo.js" data-pjax></script>
+
+        
+    
+
+</body>
+</html>
