@@ -27,16 +27,16 @@
     /* --header-title-font-family: Optima-Regular, Optima, PingFang SC; */
  
     /* 设置首屏的文字字体大小 */
-    /* --first-screen-font-size: 20px; */
+     --first-screen-font-size: 26px;
  
     /* 设置首屏的图标字体大小 */
     /* --first-screen-icon-size: 30px; */
  
     /* 设置首屏的文字颜色（白昼模式） */
-    /* --first-screen-font-color-light: rgba(224, 41, 72, 0.9); */
+      --first-screen-font-color-light: rgba(255, 255, 255, 0.9);
  
     /* 设置首屏的文字颜色（暗黑模式） */
-    /* --first-screen-font-color-dark: rgba(76, 124, 231, 0.87); */
+     --first-screen-font-color-dark: rgba(255, 255, 255, 0.9);
  
     /* 设置首屏的图标颜色（白昼模式） */
     /* --first-screen-icon-color-light: rgba(190, 37, 225, 0.9); */
